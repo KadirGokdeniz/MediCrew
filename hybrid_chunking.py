@@ -24,7 +24,7 @@ CHUNKS_COLLECTION = "paper_chunks"
 # Chunking parameters
 MAX_CHUNK_TOKENS = 512
 CHUNK_OVERLAP = 50
-MIN_CHUNK_TOKENS = 100  # merge short chunks
+MIN_CHUNK_TOKENS = 100  # Merge short chunks
 
 
 # ============================================================
@@ -32,23 +32,23 @@ MIN_CHUNK_TOKENS = 100  # merge short chunks
 # ============================================================
 
 def estimate_tokens(text: str) -> int:
-    """Token sayısını tahmin et (~4 char = 1 token)"""
+    """Estimate token count (~4 chars = 1 token)"""
     return len(text) // 4
 
 
 def split_into_sentences(text: str) -> List[str]:
-    """Cümlelere ayır"""
-    # Medical abbreviations handeling
+    """Split text into sentences, handling medical abbreviations"""
+    # Handle medical abbreviations
     text = re.sub(r'(?<=[A-Z])\.(?=[A-Z])', '.<ABBREV>', text)  # U.S.A.
     text = re.sub(r'Dr\.', 'Dr<DOT>', text)
     text = re.sub(r'vs\.', 'vs<DOT>', text)
     text = re.sub(r'i\.e\.', 'i<DOT>e<DOT>', text)
     text = re.sub(r'e\.g\.', 'e<DOT>g<DOT>', text)
     
-    # Split
+    # Split on sentence boundaries
     sentences = re.split(r'(?<=[.!?])\s+', text)
     
-    # Restore
+    # Restore abbreviations
     sentences = [s.replace('<ABBREV>', '.').replace('<DOT>', '.') 
                  for s in sentences if s.strip()]
     
@@ -72,14 +72,14 @@ def chunk_text_by_sentences(text: str, max_tokens: int = 512,
     for sentence in sentences:
         sentence_tokens = estimate_tokens(sentence)
         
-        # Çok uzun cümle - zorla böl
+        # Handle very long sentences - force split
         if sentence_tokens > max_tokens:
             if current_chunk:
                 chunks.append(' '.join(current_chunk))
                 current_chunk = []
                 current_tokens = 0
             
-            # Uzun cümleyi kelime bazında böl
+            # Split long sentence by words
             words = sentence.split()
             temp_chunk = []
             temp_tokens = 0
@@ -104,7 +104,7 @@ def chunk_text_by_sentences(text: str, max_tokens: int = 512,
             if current_chunk:
                 chunks.append(' '.join(current_chunk))
             
-            # Overlap ekle
+            # Add overlap
             overlap_sentences = []
             overlap_tokens = 0
             for sent in reversed(current_chunk):
@@ -132,13 +132,13 @@ def chunk_text_by_sentences(text: str, max_tokens: int = 512,
 # ============================================================
 
 def is_xml_content(text: str) -> bool:
-    """Text XML formatında mı kontrol et"""
+    """Check if text is in XML format"""
     xml_indicators = ['<sec', '<title>', '<p>', '</sec>', 'xmlns']
     return any(indicator in text for indicator in xml_indicators)
 
 
 def clean_xml_tags(text: str) -> str:
-    """XML tag'lerini temizle, sadece text'i al"""
+    """Remove XML tags, keep only text content"""
     # Remove XML tags but keep text
     text = re.sub(r'<[^>]+>', ' ', text)
     # Multiple spaces to single
@@ -148,11 +148,11 @@ def clean_xml_tags(text: str) -> str:
 
 def parse_xml_sections(xml_text: str) -> List[Dict[str, str]]:
     """
-    XML'den section'ları parse et
+    Parse sections from XML
     Returns: [{'title': 'Introduction', 'content': '...'}, ...]
     """
     try:
-        # XML namespace'leri kaldır (basitleştirme)
+        # Remove XML namespaces (simplification)
         xml_text = re.sub(r'xmlns[^=]*="[^"]*"', '', xml_text)
         xml_text = re.sub(r'<\?xml[^>]*\?>', '', xml_text)
         
@@ -192,8 +192,8 @@ def parse_xml_sections(xml_text: str) -> List[Dict[str, str]]:
 def chunk_xml_sections(sections: List[Dict[str, str]], 
                        max_tokens: int = 512) -> List[Dict[str, str]]:
     """
-    Section'ları chunk'la
-    Her section için title + content chunk'ları oluştur
+    Chunk sections
+    Create title + content chunks for each section
     """
     chunks = []
     
@@ -201,7 +201,7 @@ def chunk_xml_sections(sections: List[Dict[str, str]],
         title = section['title']
         content = section['content']
         
-        # Section çok kısa - tek chunk
+        # Section is short - single chunk
         section_tokens = estimate_tokens(title + content)
         if section_tokens <= max_tokens:
             chunks.append({
@@ -209,10 +209,10 @@ def chunk_xml_sections(sections: List[Dict[str, str]],
                 'text': f"{title}\n\n{content}"
             })
         else:
-            # Section'ı sentence-based chunk'la
+            # Chunk section with sentence-based approach
             text_chunks = chunk_text_by_sentences(content, max_tokens)
             for i, chunk_text in enumerate(text_chunks):
-                # İlk chunk'a title ekle
+                # Add title to first chunk
                 if i == 0:
                     final_text = f"{title}\n\n{chunk_text}"
                 else:
@@ -233,8 +233,8 @@ def chunk_xml_sections(sections: List[Dict[str, str]],
 def create_chunks_from_paper(paper: Dict) -> List[Dict]:
     """
     Hybrid chunking strategy:
-    1. Abstract → Always single chunk
-    2. Full text → Try XML parsing, fallback to sentence-based
+    1. Abstract -> Always single chunk
+    2. Full text -> Try XML parsing, fallback to sentence-based
     """
     chunks = []
     pmid = paper.get('pmid')
@@ -285,7 +285,7 @@ def create_chunks_from_paper(paper: Dict) -> List[Dict]:
         sections = parse_xml_sections(full_text)
         
         if sections:
-            # XML parsing başarılı
+            # XML parsing successful
             section_chunks = chunk_xml_sections(sections, MAX_CHUNK_TOKENS)
             
             for idx, section_chunk in enumerate(section_chunks, start=1):
@@ -318,7 +318,7 @@ def create_chunks_from_paper(paper: Dict) -> List[Dict]:
             return chunks
     
     # Strategy B: Fallback to sentence-based
-    # XML parsing başarısız veya XML değil
+    # XML parsing failed or not XML
     clean_text = clean_xml_tags(full_text) if is_xml_content(full_text) else full_text
     text_chunks = chunk_text_by_sentences(clean_text, MAX_CHUNK_TOKENS, CHUNK_OVERLAP)
     
@@ -357,8 +357,8 @@ def create_chunks_from_paper(paper: Dict) -> List[Dict]:
 # ============================================================
 
 def connect_mongodb():
-    """MongoDB bağlantısı"""
-    print("🔌 Connecting to MongoDB...")
+    """Connect to MongoDB"""
+    print("Connecting to MongoDB...")
     try:
         client = pymongo.MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
         db = client[DB_NAME]
@@ -366,32 +366,32 @@ def connect_mongodb():
         chunks_collection = db[CHUNKS_COLLECTION]
         
         client.server_info()
-        print(f"✓ Connected to MongoDB")
+        print(f"Connected to MongoDB")
         print(f"  Source: {SOURCE_COLLECTION}")
         print(f"  Target: {CHUNKS_COLLECTION}")
         
         return source_collection, chunks_collection
     except Exception as e:
-        print(f"❌ MongoDB connection failed: {e}")
+        print(f"MongoDB connection failed: {e}")
         exit(1)
 
 
 def setup_chunks_collection(chunks_collection):
-    """Chunks collection setup"""
-    # Mevcut chunk'ları temizle
+    """Setup chunks collection"""
+    # Check existing chunks
     existing = chunks_collection.count_documents({})
     if existing > 0:
-        print(f"\n⚠️  {existing} chunk zaten var")
-        choice = input("Silip yeniden oluştur? (y/n): ")
+        print(f"\nWarning: {existing} chunks already exist")
+        choice = input("Delete and recreate? (y/n): ")
         if choice.lower() == 'y':
             chunks_collection.delete_many({})
-            print("✓ Eski chunk'lar silindi")
+            print("Old chunks deleted")
         else:
-            print("İşlem iptal edildi")
+            print("Operation cancelled")
             return False
     
-    # Index'leri oluştur
-    print("\n📑 Creating indexes...")
+    # Create indexes
+    print("\nCreating indexes...")
     chunks_collection.create_index('pmid')
     chunks_collection.create_index([('pmid', 1), ('chunk_index', 1)], unique=True)
     chunks_collection.create_index('chunk_type')
@@ -399,16 +399,16 @@ def setup_chunks_collection(chunks_collection):
     chunks_collection.create_index('has_xml_structure')
     chunks_collection.create_index('embedded')
     chunks_collection.create_index('synced_to_pinecone')
-    print("✓ Indexes created")
+    print("Indexes created")
     
     return True
 
 
 def process_all_papers(source_collection, chunks_collection):
-    """Tüm paper'ları chunk'la"""
+    """Process all papers and create chunks"""
     
     total_papers = source_collection.count_documents({})
-    print(f"\n📄 Processing {total_papers} papers...")
+    print(f"\nProcessing {total_papers} papers...")
     
     papers = source_collection.find()
     
@@ -430,13 +430,13 @@ def process_all_papers(source_collection, chunks_collection):
             stats['total_chunks'] += len(chunks)
             stats['total_papers'] += 1
             
-            # İstatistik topla
+            # Collect statistics
             if len(chunks) == 1:
                 stats['abstract_only'] += 1
             else:
                 stats['with_full_text'] += 1
                 
-                # XML mi sentence-based mi?
+                # XML or sentence-based?
                 if chunks[1].get('has_xml_structure'):
                     stats['xml_parsed'] += 1
                 else:
@@ -446,9 +446,9 @@ def process_all_papers(source_collection, chunks_collection):
 
 
 def show_statistics(chunks_collection, stats):
-    """Detaylı istatistikler"""
+    """Show detailed statistics"""
     print("\n" + "="*70)
-    print("📊 CHUNKING STATISTICS")
+    print("CHUNKING STATISTICS")
     print("="*70)
     
     print(f"\nPaper Processing:")
@@ -465,7 +465,7 @@ def show_statistics(chunks_collection, stats):
     print(f"  Total chunks: {stats['total_chunks']:,}")
     print(f"  Avg chunks/paper: {stats['total_chunks']/stats['total_papers']:.1f}")
     
-    # Chunk type dağılımı
+    # Chunk type distribution
     abstract_chunks = chunks_collection.count_documents({'chunk_type': 'abstract'})
     xml_chunks = chunks_collection.count_documents({'chunk_type': 'full_text_xml'})
     text_chunks = chunks_collection.count_documents({'chunk_type': 'full_text'})
@@ -494,7 +494,7 @@ def show_statistics(chunks_collection, stats):
         print(f"  Max: {st['max_tokens']} tokens")
     
     # Sample chunks
-    print(f"\n📄 Sample chunks:")
+    print(f"\nSample chunks:")
     
     # Abstract sample
     abstract_sample = chunks_collection.find_one({'chunk_type': 'abstract'})
@@ -527,10 +527,10 @@ def show_statistics(chunks_collection, stats):
 # ============================================================
 
 def main():
-    """Ana fonksiyon"""
+    """Main function"""
     
     print("="*70)
-    print("🔪 Hybrid Medical Paper Chunking")
+    print("Hybrid Medical Paper Chunking")
     print("="*70)
     print(f"\nStrategy:")
     print(f"  1. XML-aware section parsing (if available)")
@@ -552,14 +552,14 @@ def main():
     show_statistics(chunks_collection, stats)
     
     print("\n" + "="*70)
-    print("✅ CHUNKING COMPLETE")
+    print("CHUNKING COMPLETE")
     print("="*70)
-    print(f"\n📍 Database: {DB_NAME}")
-    print(f"📍 Collection: {CHUNKS_COLLECTION}")
-    print("\n💡 Next Steps:")
+    print(f"\nDatabase: {DB_NAME}")
+    print(f"Collection: {CHUNKS_COLLECTION}")
+    print("\nNext Steps:")
     print("   1. Create embeddings (OpenAI API)")
     print("   2. Upload to Pinecone")
-    print("\n🚀 Ready for embedding generation!")
+    print("\nReady for embedding generation!")
 
 
 if __name__ == "__main__":

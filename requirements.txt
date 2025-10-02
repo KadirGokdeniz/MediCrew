@@ -24,3 +24,9 @@ mypy==1.8.0                      # Type checking
 pymongo==4.6.1
 biopython==1.83
 tqdm==4.66.1
+
+# FastAPI Dependencies
+fastapi==0.109.0
+uvicorn==0.27.0
+pydantic==2.5.3
+python-multipart==0.0.6

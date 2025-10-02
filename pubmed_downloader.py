@@ -1,6 +1,6 @@
 """
 PubMed to MongoDB Downloader
-MediCrew için - MongoDB'ye direkt veri indirme
+Downloads PubMed papers and saves to MongoDB
 """
 
 from Bio import Entrez
@@ -8,15 +8,17 @@ import time
 import pymongo
 from tqdm import tqdm
 from datetime import datetime
+from pymongo.errors import DuplicateKeyError
 
 # ============================================================
-# ⚠️ CONFIGURASYON - BURALAYI DEĞİŞTİRİN!
+# CONFIGURATION
 # ============================================================
 
-Entrez.email = "kadirqokdeniz@hotmail.com"  # ← KENDİ EMAİLİNİZİ GİRİN!
-# Entrez.api_key = "YOUR_API_KEY"  # Opsiyonel - daha hızlı indirme için
+# NCBI Entrez Configuration
+Entrez.email = "kadirqokdeniz@hotmail.com"  # CHANGE THIS!
+# Entrez.api_key = "YOUR_API_KEY"  # Optional - faster downloads
 
-# MongoDB bağlantısı
+# MongoDB Configuration
 MONGO_URI = "mongodb://localhost:27017/"
 DB_NAME = "medicrew"
 COLLECTION_NAME = "pubmed_papers"
@@ -26,38 +28,40 @@ COLLECTION_NAME = "pubmed_papers"
 # ============================================================
 
 def connect_mongodb():
-    """MongoDB'ye bağlan"""
+    """Connect to MongoDB"""
     print("🔌 Connecting to MongoDB...")
     try:
         client = pymongo.MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
         db = client[DB_NAME]
         collection = db[COLLECTION_NAME]
+        collection.drop_indexes()  
         
         # Test connection
         client.server_info()
-        print(f"✓ Connected to MongoDB: {DB_NAME}.{COLLECTION_NAME}")
+        print(f"✅ Connected to MongoDB: {DB_NAME}.{COLLECTION_NAME}")
         
-        # Mevcut document sayısı
+        # Create unique index on pmid
+        collection.create_index("pmid", unique=True)
+        
+        # Show existing document count
         existing_count = collection.count_documents({})
-        print(f"✓ Existing documents: {existing_count}")
+        print(f"📊 Existing documents: {existing_count}")
         
         return collection
     except Exception as e:
         print(f"❌ MongoDB connection failed: {e}")
-        print("\n💡 Çözümler:")
-        print("   1. MongoDB çalışıyor mu? Terminal: mongod")
-        print("   2. MongoDB Initializer çalıştırdınız mı?")
+        print("\n💡 Solutions:")
+        print("   1. Is MongoDB running? Terminal: mongod")
+        print("   2. Check MongoDB connection string")
         exit(1)
-
 
 # ============================================================
 # PUBMED API FUNCTIONS
 # ============================================================
 
 def search_pubmed(query, max_results=500):
-    """PubMed'de arama yap, PMID listesi döndür"""
-    print(f"🔍 Searching: '{query}' (max {max_results} results)...")
-    
+    """Search PubMed and return list of PMIDs"""
+    print(f"🔍 Searching: '{query}' (max {max_results} results)...")    
     try:
         handle = Entrez.esearch(
             db='pubmed',
@@ -70,7 +74,7 @@ def search_pubmed(query, max_results=500):
         handle.close()
         
         pmids = results['IdList']
-        print(f"✓ Found {len(pmids)} articles")
+        print(f"✅ Found {len(pmids)} articles")
         return pmids
     except Exception as e:
         print(f"❌ Search error: {e}")
@@ -78,7 +82,7 @@ def search_pubmed(query, max_results=500):
 
 
 def get_pmc_id(pmid):
-    """PMID'den PMC ID bul (full text için)"""
+    """Get PMC ID from PMID (for full text access)"""
     try:
         handle = Entrez.elink(
             dbfrom='pubmed',
@@ -98,7 +102,7 @@ def get_pmc_id(pmid):
 
 
 def fetch_full_text_from_pmc(pmc_id):
-    """PMC'den full text çek (Open Access için)"""
+    """Fetch full text from PMC (Open Access only)"""
     try:
         handle = Entrez.efetch(
             db='pmc',
@@ -109,10 +113,10 @@ def fetch_full_text_from_pmc(pmc_id):
         xml_content = handle.read()
         handle.close()
         
-        # XML'i text'e çevir (basitleştirilmiş)
+        # Convert XML to text (simplified)
         if xml_content and len(xml_content) > 1000:
             text = xml_content.decode('utf-8', errors='ignore')
-            # İlk 50k karakter (MongoDB document limit için)
+            # Limit to 50k characters (MongoDB document size limit)
             return text[:50000] if len(text) > 50000 else text
         return None
     except Exception as e:
@@ -120,9 +124,9 @@ def fetch_full_text_from_pmc(pmc_id):
 
 
 def fetch_paper_details(pmid):
-    """Tek paper'ın tüm detaylarını çek"""
+    """Fetch all details for a single paper"""
     try:
-        # PubMed'den basic bilgileri al
+        # Get basic info from PubMed
         handle = Entrez.efetch(
             db='pubmed',
             id=pmid,
@@ -162,7 +166,7 @@ def fetch_paper_details(pmid):
         # Authors
         author_list = article.get('AuthorList', [])
         authors = []
-        for author in author_list[:5]:  # İlk 5 yazar
+        for author in author_list[:5]:  # First 5 authors
             last = author.get('LastName', '')
             init = author.get('Initials', '')
             if last:
@@ -172,7 +176,7 @@ def fetch_paper_details(pmid):
         # URLs
         pubmed_url = f"https://pubmed.ncbi.nlm.nih.gov/{pmid_str}/"
         
-        # Full text dene (PMC'den)
+        # Try to get full text from PMC
         full_text = None
         pmc_id = get_pmc_id(pmid_str)
         pmc_url = None
@@ -180,10 +184,10 @@ def fetch_paper_details(pmid):
         if pmc_id:
             pmc_url = f"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC{pmc_id}/"
             full_text = fetch_full_text_from_pmc(pmc_id)
-            # Rate limit için ekstra bekleme
+            # Extra wait for rate limiting
             time.sleep(0.2)
         
-        # Paper objesi oluştur
+        # Create paper object
         paper = {
             'pmid': pmid_str,
             'pmc_id': pmc_id,
@@ -196,7 +200,7 @@ def fetch_paper_details(pmid):
             'pubmed_url': pubmed_url,
             'pmc_url': pmc_url,
             'downloaded_at': datetime.utcnow(),
-            'synced_to_pinecone': False,  # MongoDB initializer ile uyumlu
+            'synced_to_pinecone': False,
             'metadata': {
                 'has_full_text': full_text is not None,
                 'pmc_available': pmc_id is not None
@@ -209,15 +213,14 @@ def fetch_paper_details(pmid):
         print(f"⚠️  Error fetching PMID {pmid}: {e}")
         return None
 
-
 # ============================================================
 # MONGODB OPERATIONS
 # ============================================================
 
 def download_to_mongodb(collection, query, domain, max_results=300):
-    """PubMed'den MongoDB'ye direkt kaydet"""
+    """Download from PubMed and save directly to MongoDB"""
     
-    # Arama yap
+    # Search
     pmids = search_pubmed(query, max_results)
     
     if not pmids:
@@ -231,37 +234,37 @@ def download_to_mongodb(collection, query, domain, max_results=300):
     
     print(f"📥 Downloading {len(pmids)} papers...")
     
-    # Progress bar ile işle
+    # Process with progress bar
     for pmid in tqdm(pmids, desc="Processing"):
         try:
-            # Duplicate kontrolü
+            # Check for duplicates
             if collection.find_one({'pmid': str(pmid)}):
                 skipped_count += 1
                 continue
             
-            # Paper detaylarını çek
+            # Fetch paper details
             paper = fetch_paper_details(pmid)
             
             if not paper:
                 error_count += 1
                 continue
             
-            # Domain ve query bilgilerini ekle
+            # Add domain and query info
             paper['domain'] = domain
             paper['metadata']['query'] = query
             
-            # MongoDB'ye kaydet
+            # Save to MongoDB
             collection.insert_one(paper)
             saved_count += 1
             
-            # Full text varsa say
+            # Count full text papers
             if paper.get('full_text'):
                 full_text_count += 1
             
             # Rate limit (3 requests/second without API key)
             time.sleep(0.34)
             
-        except pymongo.errors.DuplicateKeyError:
+        except DuplicateKeyError:
             skipped_count += 1
             continue
         except Exception as e:
@@ -269,43 +272,42 @@ def download_to_mongodb(collection, query, domain, max_results=300):
             print(f"\n⚠️  Error with PMID {pmid}: {e}")
             continue
     
-    # Sonuç raporu
-    print(f"\n✓ Saved: {saved_count} papers")
+    # Summary report
+    print(f"\n✅ Saved: {saved_count} papers")
     print(f"  - With full text: {full_text_count}")
     print(f"  - Skipped (duplicate): {skipped_count}")
     print(f"  - Errors: {error_count}")
     
     return saved_count
 
-
 # ============================================================
 # MAIN FUNCTION
 # ============================================================
 
 def main():
-    """Ana fonksiyon - tüm download işlemleri"""
+    """Main function - all download operations"""
     
     print("="*70)
     print("🏥 MediCrew PubMed → MongoDB Downloader")
     print("="*70)
     print()
     
-    # Email kontrolü
+    # Email check
     if Entrez.email == "your_email@example.com":
-        print("❌ HATA: Lütfen Entrez.email'i kendi email adresinizle değiştirin!")
-        print("   Script'in üst kısmındaki satırı düzenleyin:")
-        print("   Entrez.email = 'sizin_email@example.com'")
+        print("❌ ERROR: Please set your email address!")
+        print("   Edit the line at the top of the script:")
+        print("   Entrez.email = 'your_email@example.com'")
         print()
         exit(1)
     
-    # MongoDB bağlantısı
+    # MongoDB connection
     collection = connect_mongodb()
     print()
     
     total_saved = 0
     
     # ================================================================
-    # 1. KARDIYOLOJI PAPERS
+    # 1. CARDIOLOGY PAPERS
     # ================================================================
     print("📕 CARDIOLOGY PAPERS")
     print("-"*70)
@@ -322,7 +324,7 @@ def main():
         print()
     
     # ================================================================
-    # 2. ENDOKRİNOLOJİ PAPERS
+    # 2. ENDOCRINOLOGY PAPERS
     # ================================================================
     print("\n📗 ENDOCRINOLOGY PAPERS")
     print("-"*70)
@@ -361,7 +363,7 @@ def main():
     print("📊 FINAL STATISTICS")
     print("="*70)
     
-    # Toplam sayılar
+    # Total counts
     total_count = collection.count_documents({})
     full_text_count = collection.count_documents({'full_text': {'$ne': None}})
     
@@ -369,13 +371,13 @@ def main():
     print(f"Papers with full text: {full_text_count} ({full_text_count/total_count*100:.1f}%)")
     print(f"Papers with abstract only: {total_count - full_text_count}")
     
-    # Domain dağılımı
+    # Domain breakdown
     print("\nDomain breakdown:")
     for domain in ['cardiology', 'endocrinology', 'combined']:
         count = collection.count_documents({'domain': domain})
         print(f"  - {domain.capitalize()}: {count}")
     
-    # Yıl dağılımı
+    # Year distribution
     print("\nYear distribution:")
     pipeline = [
         {'$match': {'year': {'$ne': None}}},
@@ -388,13 +390,13 @@ def main():
         print(f"  - {stat['_id']}: {stat['count']} papers")
     
     print("\n✅ DOWNLOAD COMPLETE!")
-    print(f"📍 Database: {DB_NAME}")
-    print(f"📍 Collection: {COLLECTION_NAME}")
+    print(f"📁 Database: {DB_NAME}")
+    print(f"📁 Collection: {COLLECTION_NAME}")
     print("\n💡 Next Steps:")
-    print("   1. MongoDB Compass ile veriyi görüntüleyin")
-    print("   2. Embeddings oluşturun (OpenAI API)")
-    print("   3. Pinecone'a yükleyin")
-    print("\n🚀 Ready for Pinecone upload!")
+    print("   1. View data with MongoDB Compass")
+    print("   2. Create embeddings (OpenAI API)")
+    print("   3. Upload to Pinecone")
+    print("\n🚀 Ready for API service!")
 
 
 if __name__ == "__main__":
