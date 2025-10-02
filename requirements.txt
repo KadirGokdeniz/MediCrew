@@ -1,0 +1,26 @@
+# MediCrew - Test Dependencies
+# Installation: pip install -r requirements-test.txt
+
+# Testing Framework
+pytest==7.4.3                    # Test framework
+pytest-mock==3.12.0              # Mocking support
+pytest-cov==4.1.0                # Coverage reporting
+pytest-asyncio==0.21.1           # Async test support
+
+# Mock Libraries
+mongomock==4.1.2                 # MongoDB mocking (gerçek DB'ye bağlanmadan test)
+responses==0.24.1                # HTTP request mocking
+
+# Coverage & Reporting
+coverage==7.3.4                  # Code coverage
+pytest-html==4.1.1               # HTML test reports
+
+# Development Tools
+black==23.12.1                   # Code formatting
+flake8==7.0.0                    # Linting
+mypy==1.8.0                      # Type checking
+
+# Main Dependencies (also needed for tests)
+pymongo==4.6.1
+biopython==1.83
+tqdm==4.66.1
