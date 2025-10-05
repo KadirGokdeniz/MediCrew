@@ -1,30 +1,35 @@
 """
-Hybrid Chunking Strategy for Medical Papers
+Hybrid Chunking Strategy for Medical Papers v2.0
 - XML-aware: Parses section structure if available
 - Sentence-based fallback: For non-XML or abstract-only papers
-- Intelligent overlap and boundary preservation
+- Intelligent overlap for ALL chunking strategies
 """
 
 import pymongo
 from typing import List, Dict, Optional
 import re
 from tqdm import tqdm
-from datetime import datetime
+from datetime import datetime, timezone
 import xml.etree.ElementTree as ET
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # ============================================================
 # CONFIGURATION
 # ============================================================
 
-MONGO_URI = "mongodb://localhost:27017/"
-DB_NAME = "medicrew"
+MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/")
+DB_NAME = os.getenv("DB_NAME", "medicrew")
 SOURCE_COLLECTION = "pubmed_papers"
 CHUNKS_COLLECTION = "paper_chunks"
 
 # Chunking parameters
 MAX_CHUNK_TOKENS = 512
-CHUNK_OVERLAP = 50
-MIN_CHUNK_TOKENS = 100  # Merge short chunks
+CHUNK_OVERLAP = 50  # Applied to ALL chunking strategies
+MIN_CHUNK_TOKENS = 100
 
 
 # ============================================================
@@ -39,7 +44,7 @@ def estimate_tokens(text: str) -> int:
 def split_into_sentences(text: str) -> List[str]:
     """Split text into sentences, handling medical abbreviations"""
     # Handle medical abbreviations
-    text = re.sub(r'(?<=[A-Z])\.(?=[A-Z])', '.<ABBREV>', text)  # U.S.A.
+    text = re.sub(r'(?<=[A-Z])\.(?=[A-Z])', '.<ABBREV>', text)
     text = re.sub(r'Dr\.', 'Dr<DOT>', text)
     text = re.sub(r'vs\.', 'vs<DOT>', text)
     text = re.sub(r'i\.e\.', 'i<DOT>e<DOT>', text)
@@ -139,9 +144,7 @@ def is_xml_content(text: str) -> bool:
 
 def clean_xml_tags(text: str) -> str:
     """Remove XML tags, keep only text content"""
-    # Remove XML tags but keep text
     text = re.sub(r'<[^>]+>', ' ', text)
-    # Multiple spaces to single
     text = re.sub(r'\s+', ' ', text)
     return text.strip()
 
@@ -152,11 +155,10 @@ def parse_xml_sections(xml_text: str) -> List[Dict[str, str]]:
     Returns: [{'title': 'Introduction', 'content': '...'}, ...]
     """
     try:
-        # Remove XML namespaces (simplification)
+        # Remove XML namespaces
         xml_text = re.sub(r'xmlns[^=]*="[^"]*"', '', xml_text)
         xml_text = re.sub(r'<\?xml[^>]*\?>', '', xml_text)
         
-        # Parse
         root = ET.fromstring(xml_text)
         
         sections = []
@@ -166,7 +168,7 @@ def parse_xml_sections(xml_text: str) -> List[Dict[str, str]]:
             title_elem = sec.find('title')
             title = title_elem.text if title_elem is not None else 'Untitled Section'
             
-            # Get all text from this section (excluding nested sections)
+            # Get all text from this section
             paragraphs = []
             for p in sec.findall('./p'):
                 text = ET.tostring(p, encoding='unicode', method='text')
@@ -190,10 +192,11 @@ def parse_xml_sections(xml_text: str) -> List[Dict[str, str]]:
 
 
 def chunk_xml_sections(sections: List[Dict[str, str]], 
-                       max_tokens: int = 512) -> List[Dict[str, str]]:
+                       max_tokens: int = 512,
+                       overlap: int = 50) -> List[Dict[str, str]]:
     """
-    Chunk sections
-    Create title + content chunks for each section
+    Chunk sections with overlap support (UPDATED)
+    Creates title + content chunks with overlap between chunks within sections
     """
     chunks = []
     
@@ -209,10 +212,10 @@ def chunk_xml_sections(sections: List[Dict[str, str]],
                 'text': f"{title}\n\n{content}"
             })
         else:
-            # Chunk section with sentence-based approach
-            text_chunks = chunk_text_by_sentences(content, max_tokens)
+            # Chunk section with sentence-based approach WITH OVERLAP
+            text_chunks = chunk_text_by_sentences(content, max_tokens, overlap)
             for i, chunk_text in enumerate(text_chunks):
-                # Add title to first chunk
+                # Add title to each chunk
                 if i == 0:
                     final_text = f"{title}\n\n{chunk_text}"
                 else:
@@ -233,8 +236,9 @@ def chunk_xml_sections(sections: List[Dict[str, str]],
 def create_chunks_from_paper(paper: Dict) -> List[Dict]:
     """
     Hybrid chunking strategy:
-    1. Abstract -> Always single chunk
-    2. Full text -> Try XML parsing, fallback to sentence-based
+    1. Abstract -> Always single chunk (no overlap needed)
+    2. Full text (XML) -> Section-based with overlap
+    3. Full text (non-XML) -> Sentence-based with overlap
     """
     chunks = []
     pmid = paper.get('pmid')
@@ -242,7 +246,7 @@ def create_chunks_from_paper(paper: Dict) -> List[Dict]:
     abstract = paper.get('abstract', '').strip()
     
     # ========================================
-    # CHUNK 0: Abstract (Always)
+    # CHUNK 0: Abstract (Always single chunk)
     # ========================================
     if title or abstract:
         abstract_text = f"{title}\n\n{abstract}".strip()
@@ -269,7 +273,7 @@ def create_chunks_from_paper(paper: Dict) -> List[Dict]:
             'embedded': False,
             'embedding': None,
             'synced_to_pinecone': False,
-            'created_at': datetime.utcnow()
+            'created_at': datetime.now(timezone.utc)
         }
         chunks.append(chunk)
     
@@ -285,8 +289,8 @@ def create_chunks_from_paper(paper: Dict) -> List[Dict]:
         sections = parse_xml_sections(full_text)
         
         if sections:
-            # XML parsing successful
-            section_chunks = chunk_xml_sections(sections, MAX_CHUNK_TOKENS)
+            # XML parsing successful - use overlap for consistency
+            section_chunks = chunk_xml_sections(sections, MAX_CHUNK_TOKENS, CHUNK_OVERLAP)
             
             for idx, section_chunk in enumerate(section_chunks, start=1):
                 chunk = {
@@ -311,14 +315,13 @@ def create_chunks_from_paper(paper: Dict) -> List[Dict]:
                     'embedded': False,
                     'embedding': None,
                     'synced_to_pinecone': False,
-                    'created_at': datetime.utcnow()
+                    'created_at': datetime.now(timezone.utc)
                 }
                 chunks.append(chunk)
             
             return chunks
     
-    # Strategy B: Fallback to sentence-based
-    # XML parsing failed or not XML
+    # Strategy B: Fallback to sentence-based with overlap
     clean_text = clean_xml_tags(full_text) if is_xml_content(full_text) else full_text
     text_chunks = chunk_text_by_sentences(clean_text, MAX_CHUNK_TOKENS, CHUNK_OVERLAP)
     
@@ -345,7 +348,7 @@ def create_chunks_from_paper(paper: Dict) -> List[Dict]:
             'embedded': False,
             'embedding': None,
             'synced_to_pinecone': False,
-            'created_at': datetime.utcnow()
+            'created_at': datetime.now(timezone.utc)
         }
         chunks.append(chunk)
     
@@ -366,40 +369,42 @@ def connect_mongodb():
         chunks_collection = db[CHUNKS_COLLECTION]
         
         client.server_info()
-        print(f"Connected to MongoDB")
+        print(f"✓ Connected to MongoDB")
         print(f"  Source: {SOURCE_COLLECTION}")
         print(f"  Target: {CHUNKS_COLLECTION}")
         
         return source_collection, chunks_collection
     except Exception as e:
-        print(f"MongoDB connection failed: {e}")
+        print(f"✗ MongoDB connection failed: {e}")
         exit(1)
 
 
 def setup_chunks_collection(chunks_collection):
-    """Setup chunks collection"""
-    # Check existing chunks
+    """Setup chunks collection with defensive indexing"""
     existing = chunks_collection.count_documents({})
     if existing > 0:
-        print(f"\nWarning: {existing} chunks already exist")
+        print(f"\n⚠️  Warning: {existing} chunks already exist")
         choice = input("Delete and recreate? (y/n): ")
         if choice.lower() == 'y':
             chunks_collection.delete_many({})
-            print("Old chunks deleted")
+            print("✓ Old chunks deleted")
         else:
             print("Operation cancelled")
             return False
     
-    # Create indexes
+    # Create indexes defensively
     print("\nCreating indexes...")
-    chunks_collection.create_index('pmid')
-    chunks_collection.create_index([('pmid', 1), ('chunk_index', 1)], unique=True)
-    chunks_collection.create_index('chunk_type')
-    chunks_collection.create_index('domain')
-    chunks_collection.create_index('has_xml_structure')
-    chunks_collection.create_index('embedded')
-    chunks_collection.create_index('synced_to_pinecone')
-    print("Indexes created")
+    try:
+        chunks_collection.create_index('pmid')
+        chunks_collection.create_index([('pmid', 1), ('chunk_index', 1)], unique=True)
+        chunks_collection.create_index('chunk_type')
+        chunks_collection.create_index('domain')
+        chunks_collection.create_index('has_xml_structure')
+        chunks_collection.create_index('embedded')
+        chunks_collection.create_index('synced_to_pinecone')
+        print("✓ Indexes created")
+    except Exception as e:
+        print(f"⚠️  Index creation warning: {e}")
     
     return True
 
@@ -507,7 +512,7 @@ def show_statistics(chunks_collection, stats):
     # XML sample
     xml_sample = chunks_collection.find_one({'chunk_type': 'full_text_xml'})
     if xml_sample:
-        print(f"\n2. XML-Parsed Chunk:")
+        print(f"\n2. XML-Parsed Chunk (with overlap):")
         print(f"   PMID: {xml_sample['pmid']}")
         print(f"   Section: {xml_sample['section']}")
         print(f"   Tokens: {xml_sample['token_count']}")
@@ -516,10 +521,12 @@ def show_statistics(chunks_collection, stats):
     # Sentence sample
     sent_sample = chunks_collection.find_one({'chunk_type': 'full_text'})
     if sent_sample:
-        print(f"\n3. Sentence-Based Chunk:")
+        print(f"\n3. Sentence-Based Chunk (with overlap):")
         print(f"   PMID: {sent_sample['pmid']}")
         print(f"   Tokens: {sent_sample['token_count']}")
         print(f"   Preview: {sent_sample['text'][:150]}...")
+    
+    print(f"\n💡 Note: All full-text chunks now use {CHUNK_OVERLAP} token overlap")
 
 
 # ============================================================
@@ -530,13 +537,13 @@ def main():
     """Main function"""
     
     print("="*70)
-    print("Hybrid Medical Paper Chunking")
+    print("Hybrid Medical Paper Chunking v2.0")
     print("="*70)
     print(f"\nStrategy:")
     print(f"  1. XML-aware section parsing (if available)")
     print(f"  2. Sentence-based fallback")
     print(f"  Max chunk size: {MAX_CHUNK_TOKENS} tokens")
-    print(f"  Overlap: {CHUNK_OVERLAP} tokens")
+    print(f"  Overlap: {CHUNK_OVERLAP} tokens (ALL strategies)")
     
     # MongoDB setup
     source_collection, chunks_collection = connect_mongodb()
@@ -552,14 +559,14 @@ def main():
     show_statistics(chunks_collection, stats)
     
     print("\n" + "="*70)
-    print("CHUNKING COMPLETE")
+    print("CHUNKING COMPLETE ✓")
     print("="*70)
     print(f"\nDatabase: {DB_NAME}")
     print(f"Collection: {CHUNKS_COLLECTION}")
     print("\nNext Steps:")
-    print("   1. Create embeddings (OpenAI API)")
-    print("   2. Upload to Pinecone")
-    print("\nReady for embedding generation!")
+    print("   1. Run pinecone_integration.py to create embeddings")
+    print("   2. Build RAG API for querying")
+    print("\n🚀 Ready for embedding generation!")
 
 
 if __name__ == "__main__":

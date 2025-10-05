@@ -1,27 +1,62 @@
 """
-PubMed to MongoDB Downloader
-Downloads PubMed papers and saves to MongoDB
+PubMed to MongoDB Downloader v2.0
+Enhanced version with:
+- Environment variables (.env)
+- Smart indexing
+- Hybrid MeSH + Keyword queries
+- Section-based truncation
+- Better error handling
 """
 
 from Bio import Entrez
 import time
 import pymongo
 from tqdm import tqdm
-from datetime import datetime
+from datetime import datetime, timezone
 from pymongo.errors import DuplicateKeyError
+import os
+from dotenv import load_dotenv
+import xml.etree.ElementTree as ET
+import re
+
+# Load environment variables
+load_dotenv()
 
 # ============================================================
 # CONFIGURATION
 # ============================================================
 
 # NCBI Entrez Configuration
-Entrez.email = "kadirqokdeniz@hotmail.com"  # CHANGE THIS!
-# Entrez.api_key = "YOUR_API_KEY"  # Optional - faster downloads
+Entrez.email = os.getenv("ENTREZ_EMAIL")
+Entrez.api_key = os.getenv("ENTREZ_API_KEY")  # Optional but recommended
 
 # MongoDB Configuration
-MONGO_URI = "mongodb://localhost:27017/"
-DB_NAME = "medicrew"
+MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/")
+DB_NAME = os.getenv("DB_NAME", "medicrew")
 COLLECTION_NAME = "pubmed_papers"
+
+# Rate limiting
+RATE_LIMIT = 0.34 if not Entrez.api_key else 0.1  # With API key: 10 req/sec
+
+# ============================================================
+# VALIDATION
+# ============================================================
+
+def validate_config():
+    """Validate required environment variables"""
+    if not Entrez.email:
+        print("❌ ERROR: ENTREZ_EMAIL not set in .env file!")
+        print("\n💡 Create a .env file with:")
+        print("   ENTREZ_EMAIL=your_email@example.com")
+        exit(1)
+    
+    if not Entrez.api_key:
+        print("⚠️  WARNING: ENTREZ_API_KEY not set")
+        print("   Downloads will be slower (3 req/sec vs 10 req/sec)")
+        print("   Get your key: https://www.ncbi.nlm.nih.gov/account/settings/")
+        print()
+    else:
+        print("✅ API Key detected - faster downloads enabled")
 
 # ============================================================
 # MONGODB CONNECTION
@@ -34,14 +69,14 @@ def connect_mongodb():
         client = pymongo.MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
         db = client[DB_NAME]
         collection = db[COLLECTION_NAME]
-        collection.drop_indexes()  
+        collection.drop_index("idx_pmid_unique")
         
         # Test connection
         client.server_info()
         print(f"✅ Connected to MongoDB: {DB_NAME}.{COLLECTION_NAME}")
         
-        # Create unique index on pmid
-        collection.create_index("pmid", unique=True)
+        # Smart index creation (only if not exists)
+        setup_indexes(collection)
         
         # Show existing document count
         existing_count = collection.count_documents({})
@@ -52,16 +87,50 @@ def connect_mongodb():
         print(f"❌ MongoDB connection failed: {e}")
         print("\n💡 Solutions:")
         print("   1. Is MongoDB running? Terminal: mongod")
-        print("   2. Check MongoDB connection string")
+        print("   2. Check MONGO_URI in .env file")
         exit(1)
+
+
+def setup_indexes(collection):
+    """Create indexes only if they don't exist"""
+    existing_indexes = [idx['name'] for idx in collection.list_indexes()]
+    
+    indexes_created = 0
+    
+    # PMID unique index
+    if 'pmid_1' not in existing_indexes:
+        collection.create_index("pmid", unique=True)
+        print("  ✓ Created pmid index (unique)")
+        indexes_created += 1
+    
+    # Domain index
+    if 'domain_1' not in existing_indexes:
+        collection.create_index("domain")
+        print("  ✓ Created domain index")
+        indexes_created += 1
+    
+    # Year index
+    if 'year_1' not in existing_indexes:
+        collection.create_index("year")
+        print("  ✓ Created year index")
+        indexes_created += 1
+    
+    # Synced flag index
+    if 'synced_to_pinecone_1' not in existing_indexes:
+        collection.create_index("synced_to_pinecone")
+        print("  ✓ Created synced_to_pinecone index")
+        indexes_created += 1
+    
+    if indexes_created == 0:
+        print("  ✓ All indexes already exist")
 
 # ============================================================
 # PUBMED API FUNCTIONS
 # ============================================================
 
-def search_pubmed(query, max_results=500):
+def search_pubmed(query, max_results=400):
     """Search PubMed and return list of PMIDs"""
-    print(f"🔍 Searching: '{query}' (max {max_results} results)...")    
+    print(f"🔍 Searching: '{query[:80]}...' (max {max_results} results)")    
     try:
         handle = Entrez.esearch(
             db='pubmed',
@@ -101,8 +170,89 @@ def get_pmc_id(pmid):
         return None
 
 
+def extract_priority_sections(xml_content):
+    """
+    Extract priority sections from XML
+    Priority: Abstract > Results > Methods > Conclusion > Introduction
+    Skip: Discussion (too long, repetitive)
+    """
+    try:
+        # Clean XML
+        xml_content = re.sub(r'xmlns[^=]*="[^"]*"', '', xml_content)
+        xml_content = re.sub(r'<\?xml[^>]*\?>', '', xml_content)
+        
+        root = ET.fromstring(xml_content)
+        
+        # Priority sections mapping
+        priority_map = {
+            'abstract': 10,
+            'intro': 3,
+            'introduction': 3,
+            'methods': 5,
+            'materials': 5,
+            'results': 8,
+            'conclusion': 7,
+            'conclusions': 7,
+            'discussion': 0  # Skip discussion
+        }
+        
+        sections = []
+        
+        # Find all sections
+        for sec in root.findall('.//sec'):
+            title_elem = sec.find('title')
+            title = title_elem.text.lower() if title_elem is not None else ''
+            
+            # Get priority
+            priority = 0
+            for key, val in priority_map.items():
+                if key in title:
+                    priority = val
+                    break
+            
+            if priority == 0:  # Skip low priority sections
+                continue
+            
+            # Extract text
+            paragraphs = []
+            for p in sec.findall('./p'):
+                text = ET.tostring(p, encoding='unicode', method='text')
+                if text.strip():
+                    paragraphs.append(text.strip())
+            
+            content = ' '.join(paragraphs)
+            
+            if content.strip():
+                sections.append({
+                    'title': title_elem.text if title_elem is not None else 'Section',
+                    'content': content,
+                    'priority': priority
+                })
+        
+        # Sort by priority
+        sections.sort(key=lambda x: x['priority'], reverse=True)
+        
+        # Build text with limits
+        result = []
+        total_chars = 0
+        max_chars = 150000  # 150K character limit
+        
+        for section in sections:
+            section_text = f"\n\n## {section['title']}\n{section['content']}"
+            if total_chars + len(section_text) <= max_chars:
+                result.append(section_text)
+                total_chars += len(section_text)
+            else:
+                break
+        
+        return ''.join(result) if result else None
+        
+    except Exception as e:
+        return None
+
+
 def fetch_full_text_from_pmc(pmc_id):
-    """Fetch full text from PMC (Open Access only)"""
+    """Fetch full text from PMC with section-based truncation"""
     try:
         handle = Entrez.efetch(
             db='pmc',
@@ -113,12 +263,25 @@ def fetch_full_text_from_pmc(pmc_id):
         xml_content = handle.read()
         handle.close()
         
-        # Convert XML to text (simplified)
-        if xml_content and len(xml_content) > 1000:
-            text = xml_content.decode('utf-8', errors='ignore')
-            # Limit to 50k characters (MongoDB document size limit)
-            return text[:50000] if len(text) > 50000 else text
-        return None
+        if not xml_content or len(xml_content) < 1000:
+            return None
+        
+        xml_text = xml_content.decode('utf-8', errors='ignore')
+        
+        # Strategy 1: Try section-based extraction
+        extracted = extract_priority_sections(xml_text)
+        
+        if extracted:
+            return extracted
+        
+        # Strategy 2: Fallback - simple truncation
+        # Remove XML tags
+        clean_text = re.sub(r'<[^>]+>', ' ', xml_text)
+        clean_text = re.sub(r'\s+', ' ', clean_text)
+        
+        # Truncate to 100K
+        return clean_text[:100000] if len(clean_text) > 100000 else clean_text
+        
     except Exception as e:
         return None
 
@@ -163,15 +326,20 @@ def fetch_paper_details(pmid):
         year_str = pub_date.get('Year', None)
         year = int(year_str) if year_str and year_str.isdigit() else None
         
-        # Authors
+        # Authors - First + Last + Count
         author_list = article.get('AuthorList', [])
-        authors = []
-        for author in author_list[:5]:  # First 5 authors
-            last = author.get('LastName', '')
-            init = author.get('Initials', '')
-            if last:
-                authors.append(f"{last} {init}".strip())
-        authors_str = ', '.join(authors) if authors else 'Unknown'
+        authors_str = 'Unknown'
+        
+        if author_list:
+            first_author = author_list[0]
+            first_name = f"{first_author.get('LastName', '')} {first_author.get('Initials', '')}".strip()
+            
+            if len(author_list) > 1:
+                last_author = author_list[-1]
+                last_name = f"{last_author.get('LastName', '')} {last_author.get('Initials', '')}".strip()
+                authors_str = f"{first_name}, ..., {last_name} ({len(author_list)} authors)"
+            else:
+                authors_str = first_name
         
         # URLs
         pubmed_url = f"https://pubmed.ncbi.nlm.nih.gov/{pmid_str}/"
@@ -184,8 +352,7 @@ def fetch_paper_details(pmid):
         if pmc_id:
             pmc_url = f"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC{pmc_id}/"
             full_text = fetch_full_text_from_pmc(pmc_id)
-            # Extra wait for rate limiting
-            time.sleep(0.2)
+            time.sleep(0.2)  # Extra wait for PMC
         
         # Create paper object
         paper = {
@@ -199,11 +366,12 @@ def fetch_paper_details(pmid):
             'authors': authors_str,
             'pubmed_url': pubmed_url,
             'pmc_url': pmc_url,
-            'downloaded_at': datetime.utcnow(),
+            'downloaded_at': datetime.now(timezone.utc),
             'synced_to_pinecone': False,
             'metadata': {
                 'has_full_text': full_text is not None,
-                'pmc_available': pmc_id is not None
+                'pmc_available': pmc_id is not None,
+                'full_text_length': len(full_text) if full_text else 0
             }
         }
         
@@ -217,7 +385,7 @@ def fetch_paper_details(pmid):
 # MONGODB OPERATIONS
 # ============================================================
 
-def download_to_mongodb(collection, query, domain, max_results=300):
+def download_to_mongodb(collection, query, domain, max_results=400):
     """Download from PubMed and save directly to MongoDB"""
     
     # Search
@@ -261,8 +429,8 @@ def download_to_mongodb(collection, query, domain, max_results=300):
             if paper.get('full_text'):
                 full_text_count += 1
             
-            # Rate limit (3 requests/second without API key)
-            time.sleep(0.34)
+            # Rate limit
+            time.sleep(RATE_LIMIT)
             
         except DuplicateKeyError:
             skipped_count += 1
@@ -288,17 +456,13 @@ def main():
     """Main function - all download operations"""
     
     print("="*70)
-    print("🏥 MediCrew PubMed → MongoDB Downloader")
+    print("🏥 MediCrew PubMed → MongoDB Downloader v2.0")
     print("="*70)
     print()
     
-    # Email check
-    if Entrez.email == "your_email@example.com":
-        print("❌ ERROR: Please set your email address!")
-        print("   Edit the line at the top of the script:")
-        print("   Entrez.email = 'your_email@example.com'")
-        print()
-        exit(1)
+    # Validate configuration
+    validate_config()
+    print()
     
     # MongoDB connection
     collection = connect_mongodb()
@@ -309,50 +473,51 @@ def main():
     # ================================================================
     # 1. CARDIOLOGY PAPERS
     # ================================================================
-    print("📕 CARDIOLOGY PAPERS")
+    print("🔴 CARDIOLOGY PAPERS")
     print("-"*70)
     
     cardio_queries = [
-        'heart failure treatment guidelines',
-        'coronary artery disease management',
-        'hypertension therapy'
+        # Hybrid MeSH + Keyword, 6-7 year range
+        '("Heart Failure"[MeSH] OR "heart failure"[Title/Abstract]) AND 2018:2024[pdat]',
+        '("Myocardial Infarction"[MeSH] OR "heart attack"[Title/Abstract]) AND 2018:2024[pdat]',
+        '("Hypertension"[MeSH] OR "high blood pressure"[Title/Abstract]) AND 2018:2024[pdat]',
     ]
     
     for query in cardio_queries:
-        count = download_to_mongodb(collection, query, 'cardiology', max_results=300)
+        count = download_to_mongodb(collection, query, 'cardiology', max_results=400)
         total_saved += count
         print()
     
     # ================================================================
     # 2. ENDOCRINOLOGY PAPERS
     # ================================================================
-    print("\n📗 ENDOCRINOLOGY PAPERS")
+    print("\n🔵 ENDOCRINOLOGY PAPERS")
     print("-"*70)
     
     endo_queries = [
-        'type 2 diabetes management',
-        'HbA1c control strategies',
-        'insulin therapy protocols'
+        '("Diabetes Mellitus, Type 2"[MeSH] OR "type 2 diabetes"[Title/Abstract]) AND 2018:2024[pdat]',
+        '("Glycated Hemoglobin"[MeSH] OR "HbA1c"[Title/Abstract]) AND 2018:2024[pdat]',
+        '("Insulin"[MeSH] OR "insulin therapy"[Title/Abstract]) AND 2018:2024[pdat]',
     ]
     
     for query in endo_queries:
-        count = download_to_mongodb(collection, query, 'endocrinology', max_results=300)
+        count = download_to_mongodb(collection, query, 'endocrinology', max_results=400)
         total_saved += count
         print()
     
     # ================================================================
     # 3. COMBINED PAPERS
     # ================================================================
-    print("\n📘 COMBINED PAPERS (Cardiology + Endocrinology)")
+    print("\n🟣 COMBINED PAPERS (Cardiology + Endocrinology)")
     print("-"*70)
     
     combined_queries = [
-        'diabetes cardiovascular disease',
-        'diabetic cardiomyopathy'
+        '("Diabetes Mellitus"[MeSH] AND "Cardiovascular Diseases"[MeSH]) AND 2018:2024[pdat]',
+        '("Diabetic Cardiomyopathies"[MeSH] OR "diabetic cardiomyopathy"[Title/Abstract]) AND 2018:2024[pdat]',
     ]
     
     for query in combined_queries:
-        count = download_to_mongodb(collection, query, 'combined', max_results=200)
+        count = download_to_mongodb(collection, query, 'combined', max_results=300)
         total_saved += count
         print()
     
@@ -367,7 +532,7 @@ def main():
     total_count = collection.count_documents({})
     full_text_count = collection.count_documents({'full_text': {'$ne': None}})
     
-    print(f"Total papers in MongoDB: {total_count}")
+    print(f"\nTotal papers in MongoDB: {total_count}")
     print(f"Papers with full text: {full_text_count} ({full_text_count/total_count*100:.1f}%)")
     print(f"Papers with abstract only: {total_count - full_text_count}")
     
@@ -389,14 +554,30 @@ def main():
     for stat in year_stats:
         print(f"  - {stat['_id']}: {stat['count']} papers")
     
+    # Full text stats
+    if full_text_count > 0:
+        print("\nFull text length stats:")
+        pipeline = [
+            {'$match': {'metadata.full_text_length': {'$gt': 0}}},
+            {'$group': {
+                '_id': None,
+                'avg_length': {'$avg': '$metadata.full_text_length'},
+                'max_length': {'$max': '$metadata.full_text_length'}
+            }}
+        ]
+        length_stats = list(collection.aggregate(pipeline))
+        if length_stats:
+            st = length_stats[0]
+            print(f"  - Average length: {st['avg_length']:,.0f} characters")
+            print(f"  - Max length: {st['max_length']:,.0f} characters")
+    
     print("\n✅ DOWNLOAD COMPLETE!")
     print(f"📁 Database: {DB_NAME}")
     print(f"📁 Collection: {COLLECTION_NAME}")
     print("\n💡 Next Steps:")
-    print("   1. View data with MongoDB Compass")
-    print("   2. Create embeddings (OpenAI API)")
-    print("   3. Upload to Pinecone")
-    print("\n🚀 Ready for API service!")
+    print("   1. Run hybrid_chunking.py to create chunks")
+    print("   2. Run pinecone_integration.py to create embeddings")
+    print("\n🚀 Ready for RAG system!")
 
 
 if __name__ == "__main__":

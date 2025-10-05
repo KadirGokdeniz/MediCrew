@@ -68,8 +68,7 @@ def create_indexes(collection):
     # 1. PMID (Unique) - acts as primary key
     collection.create_index(
         [("pmid", ASCENDING)],
-        unique=True,
-        name="idx_pmid_unique"
+        unique=True
     )
     print("  Created unique index: pmid")
     
