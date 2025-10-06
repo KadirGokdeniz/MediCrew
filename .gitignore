@@ -1,5 +1,6 @@
 # Python
 __pycache__/
+.pytest_cache
 *.py[cod]
 *$py.class
 *.so
@@ -34,3 +35,6 @@ htmlcov/
 # OS
 .DS_Store
 Thumbs.db
+
+paper_chunks.json
+mongodb_reset.py
