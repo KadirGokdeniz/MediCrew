@@ -1,0 +1,2060 @@
+SORU 1: What are the guideline-recommended first-line treatments for acute decompensated heart failure?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: What are the guideline-recommended first-line treatments for acute decompensated heart failure?
+Timestamp: 2025-10-09T23:57:03.726311
+
+RETRIEVAL SUMMARY:
+  Original query: What are the guideline-recommended first-line treatments for acute decompensated heart failure?
+  Abstracts found: 10
+  Full-text sections: 20
+  Routing: low_confidence
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 2,045
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Guideline-Recommended First-Line Treatments for Acute Decompensated Heart Failure
+
+Based on the most recent major guidelines, the first-line treatments for acute decompensated heart failure (ADHF) focus on immediate stabilization and symptom relief:
+
+## Core First-Line Interventions
+
+**1. Oxygen and Ventilatory Support**
+- Supplemental oxygen for hypoxemic patients
+- Non-invasive ventilation (NIV) for respiratory distress and pulmonary edema
+- These interventions address the acute respiratory compromise common in ADHF [PMID: 35379503]
+
+**2. Diuretics**
+- **Intravenous loop diuretics** are the cornerstone of initial therapy for patients with fluid overload
+- Recommended for rapid decongestion and symptom relief
+- Both ACC/AHA/HFSA 2022 and ESC 2021 guidelines emphasize early diuretic administration [PMID: 36460629, PMID: 35379503]
+
+**3. Vasodilators**
+- Considered in patients with hypertensive acute heart failure and pulmonary edema
+- Help reduce preload and afterload
+- Particularly useful in the hypertensive pulmonary edema phenotype [PMID: 33046187]
+
+## Phenotype-Specific Considerations
+
+The guidelines recognize different clinical phenotypes of acute heart failure that may require tailored approaches:
+- **Hypertensive pulmonary edema**: Vasodilators and diuretics
+- **Cardiogenic shock**: May require inotropic support and mechanical circulatory support
+- **Congestive heart failure**: Primarily diuretics for decongestion [PMID: 33046187]
+
+## Confidence Level and Limitations
+
+**High confidence** for diuretics and oxygen/ventilatory support as first-line therapies based on contemporary ACC/AHA/HFSA 2022 and ESC 2021 guidelines [PMID: 35379503, PMID: 36460629, PMID: 38583167].
+
+**Limitation**: The provided abstracts reference these guidelines but the detailed full-text sections were not populated with specific content, limiting access to granular treatment algorithms and dosing recommendations. The core principles remain well-established across major international guidelines.
+
+======================================================================
+======================================================================
+
+SORU 2: How should ST-elevation myocardial infarction (STEMI) be managed in the first 24 hours according to major cardiology guidelines?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: How should ST-elevation myocardial infarction (STEMI) be managed in the first 24 hours according to major cardiology guidelines?
+Timestamp: 2025-10-09T23:57:17.941076
+
+RETRIEVAL SUMMARY:
+  Original query: How should ST-elevation myocardial infarction (STEMI) be managed in the first 24 hours according to major cardiology guidelines?
+  Expanded query: How should ST-elevation myocardial infarction (STEMI) ST elevation myocardial infarction STEMI be managed in the first 24 hours according to major cardiology guidelines?
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 3,099
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Management of STEMI in the First 24 Hours According to Major Guidelines
+
+## Direct Answer
+
+Based on the 2023 European Society of Cardiology (ESC) guidelines, STEMI management in the first 24 hours focuses on **immediate reperfusion therapy** as the cornerstone of treatment, with specific attention to timing, revascularization strategies, and antithrombotic therapy [PMID: 38032511].
+
+## Key Management Components
+
+### 1. **Immediate Reperfusion**
+The primary goal is prompt restoration of coronary blood flow. **Primary percutaneous coronary intervention (PCI)** is the preferred reperfusion strategy, with a target door-to-balloon time of ≤90 minutes [PMID: 33320732, PMID: 37904413]. When PCI is not immediately available, thrombolytic therapy should be considered [PMID: 37904413].
+
+### 2. **Prehospital Recognition and Transport**
+Early recognition is critical, including identification of STEMI equivalents (Wellens syndrome, De Winter T waves, and aVR ST elevation) that may warrant similar urgent intervention [PMID: 33320732]. Patients should be transported directly to PCI-capable centers.
+
+### 3. **Revascularization Strategy**
+The 2023 ESC guidelines provide updated recommendations for revascularization procedures, particularly addressing management of multivessel coronary artery disease during the acute phase [PMID: 38032511].
+
+### 4. **Antithrombotic Treatment**
+Current standard includes novel P2Y12 inhibitors as part of dual antiplatelet therapy [PMID: 33305709]. The 2023 guidelines introduce alternative antithrombotic regimens specifically for patients at high bleeding risk [PMID: 38032511].
+
+### 5. **Complications Management**
+Guidelines address management of:
+- Out-of-hospital cardiac arrest
+- Cardiogenic shock
+- Other acute complications requiring immediate intervention [PMID: 38032511]
+
+### 6. **Technical Aspects**
+Current best practices include:
+- Routine radial artery access for catheterization
+- Drug-eluting stent (DES) implantation as standard of care [PMID: 33305709]
+
+## Confidence Level and Limitations
+
+**High confidence** for general principles, as these are based on major ESC guidelines from 2023. However, the provided abstracts do not contain granular details about specific medication dosing, exact timing protocols for different clinical scenarios, or detailed algorithms for complication management. Full guideline documents would provide more comprehensive protocols for the complete 24-hour management period.
+
+The evidence emphasizes that STEMI requires time-critical intervention, with outcomes directly related to speed of reperfusion therapy [PMID: 37904413, PMID: 35314025].
+
+======================================================================
+======================================================================
+
+SORU 3: What are the current indications for coronary artery bypass grafting (CABG) versus percutaneous coronary intervention (PCI) in multivessel coronary disease?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: What are the current indications for coronary artery bypass grafting (CABG) versus percutaneous coronary intervention (PCI) in multivessel coronary disease?
+Timestamp: 2025-10-09T23:57:36.388809
+
+RETRIEVAL SUMMARY:
+  Original query: What are the current indications for coronary artery bypass grafting (CABG) versus percutaneous coronary intervention (PCI) in multivessel coronary disease?
+  Expanded query: What are the current indications for coronary artery bypass grafting (CABG) coronary artery bypass graft CABG versus percutaneous coronary intervention (PCI) percutaneous coronary intervention angioplasty in multivessel coronary
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 3,390
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Current Indications for CABG vs PCI in Multivessel Coronary Disease
+
+## Direct Answer
+
+Based on current evidence, **CABG remains the standard of care for multivessel coronary disease**, particularly for specific patient populations, though PCI is increasingly considered a reasonable alternative in selected cases based on disease complexity [PMID: 33941604].
+
+## Key Clinical Indications
+
+### CABG is Preferred for:
+
+1. **Patients with diabetes and multivessel disease** - CABG is specifically recommended as standard of care in this population [PMID: 33941604]
+
+2. **Complex coronary anatomy** - The FAME 3 trial demonstrated that coronary disease complexity (measured by SYNTAX score) significantly influences outcomes, with CABG showing superior results in more complex disease [PMID: 39197985]
+
+3. **Long-term survival benefit** - CABG provides surgical collateralization that may prolong life by preventing future myocardial infarctions [PMID: 38102297]
+
+### Evidence Supporting CABG:
+
+**Mortality Outcomes:**
+- A pooled analysis of 11,518 patients from 11 randomized trials showed CABG was associated with lower all-cause mortality over mean 3.8-year follow-up compared to PCI [PMID: 29478841]
+
+- In octogenarians with left main or multivessel disease, CABG demonstrated lower late mortality (>5 years) with HR 1.23 (95% CI 1.05-1.44, p<0.01), though PCI showed advantage in the first 30 days [PMID: 38102297]
+
+- Contemporary Medicare data (2018-2020) showed CABG associated with lower hospital mortality (OR 0.74, p<0.001) and fewer hospital readmissions at 3 years compared to multivessel PCI [PMID: 37353103]
+
+**Timing Considerations:**
+- Landmark analyses reveal a survival advantage for PCI in the first 30 days post-procedure, comparable survival from 1-21.5 months, but significant CABG superiority after 21.5 months (HR 1.31, 1.19-1.44, p<0.0001) [PMID: 38102297]
+
+### When PCI May Be Considered:
+
+1. **Lower complexity disease** - The FAME 3 trial identified optimal SYNTAX score thresholds where PCI becomes a reasonable alternative to CABG, with significant interactions between revascularization strategy and disease complexity [PMID: 39197985]
+
+2. **Short-term risk considerations** - PCI may be preferred in patients where immediate perioperative risk is a primary concern [PMID: 38102297]
+
+3. **Patient preference and comorbidities** - A multidisciplinary heart team approach is recommended to optimize treatment selection based on individual patient factors [PMID: 33941604]
+
+## Important Considerations
+
+**Operative Strategy Matters:** Not all CABG procedures are equivalent—operative strategy, including conduit choice and target coronary selection, significantly affects survival outcomes [PMID: 33941604]
+
+**Disease Complexity Assessment:** SYNTAX scores should be used to guide revascularization strategy, as there are identifiable thresholds where PCI outcomes approach those of CABG [PMID: 39197985]
+
+## Confidence Level and Limitations
+
+**High confidence** for the overall superiority of CABG in multivessel disease, particularly with diabetes and complex anatomy, based on multiple randomized trials and large registry data. However, the optimal SYNTAX score thresholds for PCI consideration require individualized assessment through multidisciplinary heart team evaluation. The evidence strongly supports that revascularization decisions should not be based solely on anatomic complexity but should incorporate patient-specific factors including age, comorbidities, and procedural risk.
+
+======================================================================
+======================================================================
+
+SORU 4: Which patients with atrial fibrillation should receive anticoagulation for stroke prevention and how to choose between DOACs and warfarin?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: Which patients with atrial fibrillation should receive anticoagulation for stroke prevention and how to choose between DOACs and warfarin?
+Timestamp: 2025-10-09T23:57:49.113280
+
+RETRIEVAL SUMMARY:
+  Original query: Which patients with atrial fibrillation should receive anticoagulation for stroke prevention and how to choose between DOACs and warfarin?
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 3,063
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Anticoagulation for Stroke Prevention in Atrial Fibrillation
+
+## Which Patients Should Receive Anticoagulation?
+
+**Risk Stratification:**
+The CHA₂DS₂-VASc score remains the recommended risk stratification tool for identifying patients who need anticoagulation [PMID: 31533990, PMID: 30144419]. 
+
+**Treatment Recommendations:**
+- **Low-risk patients** (CHA₂DS₂-VASc score of 0 in males or 1 in females): No antithrombotic therapy is suggested [PMID: 30144419]
+- **Patients with ≥1 non-sex CHA₂DS₂-VASc stroke risk factors**: Oral anticoagulation therapy should be considered for stroke prevention [PMID: 30144419]
+
+This applies to patients with atrial fibrillation without valvular heart disease, including those with paroxysmal AF [PMID: 30144419].
+
+## Choosing Between DOACs and Warfarin
+
+**DOACs as First-Line Therapy:**
+Direct oral anticoagulants (DOACs) are now the first-choice treatment for AF and have become the most prescribed class of anticoagulants globally, overtaking vitamin K antagonists (VKAs) like warfarin [PMID: 36244055].
+
+**Comparative Efficacy and Safety:**
+Compared to VKAs, DOACs have:
+- Similar or better efficacy/safety profile [PMID: 36244055]
+- **Significantly reduced risk of intracranial hemorrhage (ICH)** [PMID: 36244055, PMID: 35018878]
+- Variable risk of major bleeding and other bleeding complications depending on the specific DOAC [PMID: 36244055]
+
+**Clinical Advantages:**
+DOACs offer practical benefits including the potential for earlier anticoagulation after acute ischemic stroke due to their lower ICH risk [PMID: 35018878].
+
+**Special Considerations:**
+The optimal DOAC choice should be individualized based on:
+- Patient characteristics (elderly, extreme body weights, chronic kidney disease)
+- Individual bleeding risk profile [PMID: 36244055]
+
+## Confidence Level and Limitations
+
+This guidance is based on high-quality evidence from randomized controlled trials and observational studies. The CHA₂DS₂-VASc score has known limitations [PMID: 31533990], and individual patient factors should always be considered when making treatment decisions. The specific choice among DOACs requires consideration of patient-specific factors, though detailed comparative data between individual DOACs was not provided in these abstracts.
+
+======================================================================
+======================================================================
+
+SORU 5: What is the recommended duration of dual antiplatelet therapy after drug-eluting stent placement?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: What is the recommended duration of dual antiplatelet therapy after drug-eluting stent placement?
+Timestamp: 2025-10-09T23:58:04.450433
+
+RETRIEVAL SUMMARY:
+  Original query: What is the recommended duration of dual antiplatelet therapy after drug-eluting stent placement?
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 3,380
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Recommended Duration of Dual Antiplatelet Therapy After Drug-Eluting Stent Placement
+
+## Direct Answer
+
+The optimal duration of dual antiplatelet therapy (DAPT) after drug-eluting stent (DES) placement depends on the clinical context and individual patient risk profiles. Current evidence supports:
+
+- **Standard duration: 12 months** for most patients [PMID: 32588238, 33135064]
+- **Short duration: 3-6 months** may be appropriate for selected patients, particularly those at high bleeding risk [PMID: 32588238, 37511955]
+- **Extended duration: >12 months** may benefit specific high-risk populations [PMID: 33135064]
+
+## Evidence-Based Findings
+
+### Acute Coronary Syndrome (ACS)
+In ACS patients receiving second-generation DES, short-duration DAPT (≤6 months) showed comparable efficacy to standard-duration DAPT (≥12 months). A pooled analysis of 2,216 ACS patients found no significant difference in composite endpoints (cardiac death, MI, stent thrombosis, stroke, or major bleeding) between short-DAPT (2.0%) and standard-DAPT (1.9%; HR 1.03, 95% CI 0.56-1.86, p=0.94) [PMID: 30475845].
+
+### Risk-Stratified Approach
+A large pooled analysis of 5,131 patients demonstrated that DAPT duration should be individualized based on bleeding and ischemic risk scores:
+- **Low bleeding risk + high ischemic risk**: Standard-duration DAPT (≥12 months) was associated with fewer ischemic events (6.9% vs. 4.0%, p=0.02) without increased bleeding [PMID: 32588238]
+- **High bleeding risk**: Very short DAPT (≤3 months) reduced major bleeding (OR 0.61, 95% CI 0.39-0.87) [PMID: 33135064]
+
+### Extended DAPT Considerations
+Extended DAPT (>12 months) compared to standard duration showed:
+- Reduced myocardial infarction rates (OR 0.56, 95% CI 0.44-0.77) [PMID: 33135064]
+- Reduced stent thrombosis in ACS patients [PMID: 33135064]
+- Increased bleeding risk [PMID: 37511955]
+
+### Very Short Duration
+For high-bleeding risk patients, DAPT as short as 1-3 months may be equivalent in efficacy to longer durations, particularly with second-generation DES [PMID: 37511955].
+
+## Confidence Level and Limitations
+
+**High confidence** for the 12-month standard duration recommendation, supported by multiple randomized trials. **Moderate confidence** for shorter durations in selected populations, as this represents an evolving area with individualized risk-benefit considerations.
+
+**Limitations**: Optimal duration requires balancing ischemic and bleeding risks using validated risk scores (DAPT score, PRECISE-DAPT score). The evidence primarily pertains to second-generation DES, and individual patient factors (bleeding risk, ischemic risk, clinical presentation) should guide final decisions [PMID: 32588238, 33135064].
+
+======================================================================
+======================================================================
+
+SORU 6: What diagnostic criteria define heart failure with preserved ejection fraction (HFpEF) and which tests confirm it?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: What diagnostic criteria define heart failure with preserved ejection fraction (HFpEF) and which tests confirm it?
+Timestamp: 2025-10-09T23:58:23.638030
+
+RETRIEVAL SUMMARY:
+  Original query: What diagnostic criteria define heart failure with preserved ejection fraction (HFpEF) and which tests confirm it?
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 3,391
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Diagnostic Criteria for Heart Failure with Preserved Ejection Fraction (HFpEF)
+
+## Direct Answer
+
+HFpEF is diagnosed using a stepwise approach that requires: (1) preserved left ventricular ejection fraction (LVEF ≥50%), (2) evidence of heart failure symptoms/signs, (3) objective evidence of cardiac structural/functional abnormalities, and (4) elevated natriuretic peptides. The most comprehensive diagnostic framework is the **HFA-PEFF diagnostic algorithm** developed by the European Society of Cardiology [PMID: 32133741, PMID: 31504452].
+
+## Diagnostic Algorithm and Criteria
+
+### Step 1: Pre-test Assessment (P)
+The initial evaluation includes [PMID: 32133741]:
+- **Clinical assessment**: Heart failure symptoms (dyspnea, fatigue) and signs
+- **Risk factors**: Obesity, hypertension, diabetes mellitus, elderly age, atrial fibrillation
+- **Basic tests**: 
+  - ECG
+  - Echocardiography showing normal LVEF
+  - Natriuretic peptides (elevated levels support diagnosis, but normal levels don't exclude HFpEF)
+- **Exclusions**: No significant valvular disease, cardiac ischemia, or overt non-cardiac causes of breathlessness
+
+### Step 2: Echocardiography and Natriuretic Peptide Score (E)
+Comprehensive echocardiographic evaluation with a scoring system [PMID: 32133741, PMID: 31504452]:
+
+**Parameters assessed:**
+- Mitral annular early diastolic velocity (e')
+- LV filling pressure (E/e' ratio)
+- Left atrial volume index
+- LV mass index
+- LV relative wall thickness
+- Tricuspid regurgitation velocity
+- LV global longitudinal systolic strain
+- Serum natriuretic peptide levels
+
+**Scoring interpretation:**
+- **≥5 points**: Definite HFpEF
+- **2-4 points**: Intermediate (requires functional testing)
+- **≤1 point**: HFpEF unlikely
+
+### Step 3: Functional Testing (F)
+For intermediate scores, diastolic stress testing may be performed to identify abnormal elevation of filling pressure during exercise [PMID: 37542477].
+
+## Confirmatory Tests
+
+1. **Natriuretic peptides**: NT-proBNP >125 pg/ml supports diagnosis [PMID: 34155916]
+2. **Echocardiography**: Demonstrates cardiac structural abnormalities (LV hypertrophy or left atrial enlargement) and elevated filling pressures [PMID: 34155916, PMID: 37542477]
+3. **Speckle tracking strain**: More sensitive than LVEF for detecting subtle systolic dysfunction; can reveal reduced contractility even when EF appears normal [PMID: 37542477]
+4. **Exercise stress testing**: Non-invasive or invasive diastolic stress testing identifies abnormal filling pressure elevation during exercise in patients with normal resting values [PMID: 37542477]
+
+## Key Diagnostic Considerations
+
+- **LVEF threshold**: Generally ≥50%, though recent nomenclature suggests ≥55% in men and ≥60% in women for "normal" EF [PMID: 34167646]
+- **Elevated filling pressure** is a diagnostic hallmark and can be assessed with good accuracy using a combination of echocardiographic parameters [PMID: 37542477]
+- The diagnosis requires **objective evidence** of cardiac dysfunction, not just symptoms plus preserved EF
+
+## Confidence Level and Limitations
+
+**High confidence** in the HFA-PEFF algorithm as the current gold standard for HFpEF diagnosis, based on consensus recommendations from major cardiology societies. However, the diagnosis remains challenging, and the algorithm acknowledges that some patients require functional testing for definitive diagnosis [PMID: 32133741]. The evidence provided comes from high-quality consensus guidelines and review articles published in premier cardiology journals (2019-2023).
+
+======================================================================
+======================================================================
+
+SORU 7: How do you interpret troponin dynamics to differentiate acute myocardial infarction from chronic elevation?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: How do you interpret troponin dynamics to differentiate acute myocardial infarction from chronic elevation?
+Timestamp: 2025-10-09T23:58:41.082582
+
+RETRIEVAL SUMMARY:
+  Original query: How do you interpret troponin dynamics to differentiate acute myocardial infarction from chronic elevation?
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 2,877
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Interpreting Troponin Dynamics: Acute MI vs. Chronic Elevation
+
+## Direct Answer
+
+Differentiating acute myocardial infarction (AMI) from chronic troponin elevation requires analyzing the **temporal pattern** of troponin release, including the **slope of rise, peak concentration, and serial changes** over time, rather than relying solely on absolute values.
+
+## Evidence-Based Approach
+
+### 1. **Serial Measurements and Release Kinetics**
+
+The key to differentiation lies in understanding troponin dynamics through serial measurements. Research demonstrates that **time-course acquisitions** can be used to model cardiac troponin T (cTnT) release curves, allowing for quantitative analysis of the acute event [PMID: 32725546]. This mathematical modeling approach can reliably estimate infarct characteristics using cTnT concentrations taken in the first few hours post-AMI, with effectiveness demonstrated even when the first measurement is taken up to 12 hours after the event [PMID: 32725546].
+
+### 2. **Pattern Recognition Over Absolute Values**
+
+Current evidence suggests that **hs-cTnT release pattern, slope steepness, and changes** are more informative than single threshold values [PMID: 34689381]. This approach could lead to patient-specific models capable of predicting expected versus abnormal ranges of hs-cTnT release, enabling improved and timely diagnosis of myocardial infarction [PMID: 34689381].
+
+### 3. **Context-Dependent Interpretation**
+
+Proper interpretation of high-sensitivity cardiac troponin (hs-cTn) varies based on:
+- The specific assay being used [PMID: 36882634]
+- Pre-test probability (using likelihood ratios rather than predictive values) [PMID: 36882634]
+- Clinical context, including the presence of underlying cardiac conditions [PMID: 36414386]
+
+### 4. **Magnitude of Elevation**
+
+While not the sole criterion, peak troponin levels can provide supportive evidence. For example, in defining occlusion MI (OMI), peak troponin I >10,000 ng/L combined with new regional wall motion abnormalities suggests acute occlusive disease [PMID: 37611526].
+
+## Clinical Implications
+
+**For Acute MI:**
+- Rising and/or falling pattern (dynamic change)
+- Steep slope of increase
+- Peak followed by decline
+- Correlation with clinical presentation timing
+
+**For Chronic Elevation:**
+- Stable or minimally fluctuating levels
+- Absence of significant delta change
+- Persistent elevation without acute rise/fall pattern
+
+## Limitations
+
+The provided evidence does not include specific quantitative thresholds for delta changes or time intervals for serial measurements. Additionally, the research emphasizes that **a clear clinical question should precede biomarker testing** [PMID: 36414386], and interpretation must account for patient-specific factors including age, underlying cardiac disease, and procedural context.
+
+**Confidence Level:** Moderate - The evidence supports the principle of dynamic interpretation but lacks specific operational thresholds for routine clinical application.
+
+======================================================================
+======================================================================
+
+SORU 8: Which ECG findings are diagnostic for atrial flutter versus atrial fibrillation, and how to recognize ventricular tachycardia?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: Which ECG findings are diagnostic for atrial flutter versus atrial fibrillation, and how to recognize ventricular tachycardia?
+Timestamp: 2025-10-09T23:58:54.294010
+
+RETRIEVAL SUMMARY:
+  Original query: Which ECG findings are diagnostic for atrial flutter versus atrial fibrillation, and how to recognize ventricular tachycardia?
+  Expanded query: Which ECG electrocardiogram EKG findings are diagnostic for atrial flutter versus fibrillation, and how to recognize ventricular tachycardia?
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 2,490
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# ECG Findings for Atrial Flutter vs. Atrial Fibrillation and Recognition of Ventricular Tachycardia
+
+## Direct Answer
+
+Based on the available literature, I can provide guidance on recognizing ventricular tachycardia (VT), though the provided papers have **limited specific information** on distinguishing atrial flutter from atrial fibrillation.
+
+## Ventricular Tachycardia Recognition
+
+### ECG Classification and Diagnosis
+
+**VT should be classified based on ECG morphology into:**
+- **Monomorphic VT** - uniform QRS morphology
+- **Polymorphic VT/Ventricular Fibrillation (VF)** - varying QRS morphology
+
+[PMID: 32030516]
+
+### Diagnostic Approach
+
+The 12-lead ECG is the **initial mapping tool** for ventricular arrhythmias and is crucial for:
+1. Predicting the site of origin
+2. Differentiating potential mechanisms
+3. Identifying underlying cardiac pathologies
+4. Distinguishing structural from idiopathic (non-structural) VT
+
+[PMID: 32030516, PMID: 30954600]
+
+**Key principle:** Understanding the attitudinal orientation of the heart within the chest and the relationship between cardiac structures is crucial for ECG interpretation. A stepwise anatomical approach using sequential analysis of relevant ECG features helps localize ventricular arrhythmias [PMID: 30954600].
+
+### Differential Diagnosis Consideration
+
+Scrutinizing the ECG during VA is "extremely helpful" to differentiate if a ventricular origin is unclear versus other arrhythmias [PMID: 32030516].
+
+## Atrial Flutter vs. Atrial Fibrillation
+
+**Evidence Limitation:** The provided research papers do not contain specific diagnostic ECG criteria distinguishing atrial flutter from atrial fibrillation. One paper mentions AF detection methodology but focuses on signal processing rather than diagnostic ECG features [PMID: 36718172].
+
+## Confidence Level and Limitations
+
+**High confidence:** VT recognition principles and classification approach
+**Limited evidence:** Specific ECG criteria for atrial flutter vs. atrial fibrillation distinction
+
+The available literature emphasizes that the ECG remains an "irreplaceable first step" in evaluating cardiac arrhythmias [PMID: 31349064], but the specific diagnostic criteria you requested for atrial arrhythmias are not detailed in these particular papers.
+
+======================================================================
+======================================================================
+
+SORU 9: What are the echocardiographic features suggestive of hypertrophic cardiomyopathy (HCM)?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: What are the echocardiographic features suggestive of hypertrophic cardiomyopathy (HCM)?
+Timestamp: 2025-10-09T23:59:04.431209
+
+RETRIEVAL SUMMARY:
+  Original query: What are the echocardiographic features suggestive of hypertrophic cardiomyopathy (HCM)?
+  Expanded query: What are the echocardiographic features suggestive of hypertrophic cardiomyopathy (HCM)? hypertrophic cardiomyopathy HCM
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 2,532
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Echocardiographic Features of Hypertrophic Cardiomyopathy (HCM)
+
+## Direct Answer
+
+Based on the provided research, the key echocardiographic features suggestive of HCM include:
+
+**Primary Diagnostic Feature:**
+- **Left ventricular hypertrophy (LVH)** - This is the hallmark finding, characterized as "unexplained left ventricular hypertrophy" [PMID: 31888115]. The hypertrophy is typically **asymmetric septal hypertrophy** [PMID: 37933625].
+
+**Structural Features:**
+- **Dynamic left ventricular outflow tract (LVOT) obstruction** - This is a characteristic feature, particularly in obstructive forms of HCM [PMID: 37933625]
+- **Abnormal papillary muscle placement** [PMID: 37933625]
+- **Abnormal mitral valve and subvalvular apparatus** [PMID: 37933625]
+- **Apical hypertrophic forms** - These represent a variant pattern of hypertrophy [PMID: 37933625]
+
+**Functional Features:**
+- **Hypercontractility** - Increased contractile function of the left ventricle [PMID: 40813376]
+- **Diastolic dysfunction** - Impaired relaxation and filling of the ventricle [PMID: 40813376]
+
+## Clinical Context
+
+Echocardiography is described as "pivotal for diagnostic and prognostic assessment in HCM" [PMID: 40813376], alongside cardiac magnetic resonance imaging. The diagnosis requires distinguishing obstructive versus nonobstructive forms during comprehensive initial patient evaluations [PMID: 35086660].
+
+## Confidence Level and Limitations
+
+**High confidence** for the primary features listed above. However, the provided abstracts do not detail specific quantitative echocardiographic measurements (such as septal wall thickness thresholds) or comprehensive technical parameters. For detailed echocardiographic protocols and specific measurement criteria, full-text guidelines would provide more comprehensive information.
+
+======================================================================
+======================================================================
+
+SORU 10: What cardiac MRI findings support the diagnosis of myocarditis?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: What cardiac MRI findings support the diagnosis of myocarditis?
+Timestamp: 2025-10-09T23:59:15.374631
+
+RETRIEVAL SUMMARY:
+  Original query: What cardiac MRI findings support the diagnosis of myocarditis?
+  Expanded query: What cardiac MRI magnetic resonance imaging MR imaging findings support the diagnosis of myocarditis?
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 2,381
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Cardiac MRI Findings Supporting Myocarditis Diagnosis
+
+## Direct Answer
+
+Cardiac MRI (CMR) is regarded as the **non-invasive diagnostic modality of choice for myocarditis** [PMID: 35861382]. The key findings that support this diagnosis include:
+
+## Primary Diagnostic Features
+
+1. **Tissue Characterization Abnormalities**
+   - Detection of **inflammatory processes** in the myocardium [PMID: 33648004]
+   - Identification of **myocardial edema** and tissue changes
+   - **Structural imaging** capabilities that reveal myocardial tissue alterations [PMID: 33648004]
+
+2. **Scar and Fibrosis Detection**
+   - CMR excels at **detection and quantification of scars and fibrosis**, which can occur in myocarditis [PMID: 33648004]
+
+3. **Quantitative Mapping Techniques**
+   - **Quantitative mapping techniques** are increasingly used for tissue characterization and detection of diffuse myocardial changes [PMID: 32385547]
+   - These techniques enhance the ability to identify subtle inflammatory changes
+
+## Multiparametric Approach
+
+CMR employs a **multiparametric approach** in diagnosing, monitoring, and providing prognostication for myocarditis [PMID: 35592889]. This comprehensive evaluation combines multiple imaging sequences to increase diagnostic accuracy.
+
+## Clinical Context
+
+CMR has become an **irreplaceable tool for diagnosis, treatment guidance, and follow-up** of patients with myocarditis [PMID: 32385547]. It serves as a valuable biomarker for monitoring disease activity and quantifying response to therapeutics in inflammatory cardiomyopathies including myocarditis [PMID: 37700499].
+
+## Limitations
+
+While CMR is highly valuable, it has certain limitations:
+- **Technical challenges** in acutely unwell and uncooperative patients
+- **Contraindications to gadolinium** use in patients with renal impairment
+- Image quality can still be challenging [PMID: 33648004, 35861382]
+
+**Confidence Level:** High - CMR is well-established as the preferred non-invasive diagnostic tool for myocarditis, though the provided abstracts do not detail specific diagnostic criteria (such as the Lake Louise Criteria).
+
+======================================================================
+======================================================================
+
+SORU 11: What is the comparative effectiveness of ACE inhibitors versus ARBs in chronic heart failure with reduced ejection fraction?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: What is the comparative effectiveness of ACE inhibitors versus ARBs in chronic heart failure with reduced ejection fraction?
+Timestamp: 2025-10-09T23:59:30.597605
+
+RETRIEVAL SUMMARY:
+  Original query: What is the comparative effectiveness of ACE inhibitors versus ARBs in chronic heart failure with reduced ejection fraction?
+  Expanded query: What is the comparative effectiveness of ACE angiotensin converting enzyme inhibitors versus ARBs in chronic heart failure with reduced ejection fraction?
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 3,441
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Comparative Effectiveness of ACE Inhibitors versus ARBs in Chronic Heart Failure with Reduced Ejection Fraction
+
+## Direct Answer
+
+Based on the available evidence, **ACE inhibitors and ARBs demonstrate comparable effectiveness** in heart failure with reduced ejection fraction (HFrEF), with no significant prognostic differences between the two drug classes for major clinical outcomes.
+
+## Supporting Evidence
+
+### Comparable Survival and Clinical Outcomes
+
+The research indicates that ACE inhibitors and ARBs show **similar survival results** in patients with heart failure and reduced left ventricular ejection fraction [PMID: 32757765]. In a propensity-matched analysis of 3,006 patients (though this study focused on preserved LVEF ≥40% after acute coronary syndrome), no significant differences were found between ACEi and ARB for:
+- All-cause mortality (HR for ARB: 0.95, 95% CI: 0.70-1.29)
+- Acute myocardial infarction (HR for ARB: 1.34, 95% CI: 0.95-1.89)
+- Heart failure events (HR for ARB: 1.11, 95% CI: 0.85-1.45)
+- Combined endpoints (HR for ARB: 1.14, 95% CI: 0.92-1.40) [PMID: 32757765]
+
+### Current Treatment Paradigm
+
+Both ACE inhibitors and ARBs are considered **conventional therapy** for HFrEF and serve as foundational treatments [PMID: 32446323]. In contemporary heart failure management, comprehensive disease-modifying therapy includes either an ACE inhibitor or ARB combined with β-blockers, with newer agents (ARNIs, MRAs, SGLT2 inhibitors) providing additional mortality benefits beyond this conventional therapy [PMID: 32446323].
+
+### Clinical Practice Patterns
+
+In acute heart failure settings, ACEi/ARB use patterns are influenced by hemodynamic parameters. Patients on these medications typically have higher systemic vascular resistance and mean arterial pressure but lower cardiac index. Common reasons for discontinuation include worsening renal function, hypotension, and hyperkalemia [PMID: 33792263].
+
+## Confidence Level and Limitations
+
+**Moderate-to-High Confidence:** The evidence consistently supports equivalence between ACE inhibitors and ARBs for HFrEF outcomes.
+
+**Limitations:**
+1. The most directly relevant study [PMID: 32757765] focused on preserved rather than reduced ejection fraction
+2. No head-to-head randomized controlled trials specifically comparing ACEi versus ARB in chronic HFrEF were provided
+3. The evidence base relies on indirect comparisons and observational data
+4. Individual patient factors (tolerability, side effect profiles, cost) may influence drug selection despite similar efficacy
+
+**Clinical Implication:** Either ACE inhibitor or ARB is appropriate as first-line renin-angiotensin system blockade in HFrEF, with selection based on patient-specific factors rather than expected differences in major clinical outcomes.
+
+======================================================================
+======================================================================
+
+SORU 12: How do outcomes compare between PCI and conservative therapy in stable coronary artery disease?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: How do outcomes compare between PCI and conservative therapy in stable coronary artery disease?
+Timestamp: 2025-10-09T23:59:49.734372
+
+RETRIEVAL SUMMARY:
+  Original query: How do outcomes compare between PCI and conservative therapy in stable coronary artery disease?
+  Expanded query: How do outcomes compare between PCI percutaneous coronary intervention angioplasty and conservative therapy in stable coronary artery disease?
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 3,425
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Comparison of PCI versus Conservative Therapy in Stable Coronary Artery Disease
+
+## Direct Answer
+
+Based on recent high-quality evidence, **PCI does not provide a significant mortality or major cardiovascular event benefit over conservative medical therapy alone** in patients with stable coronary artery disease, even in those with moderate to severe ischemia.
+
+## Key Evidence
+
+### The ISCHEMIA Trial
+The landmark ISCHEMIA trial [PMID: 32227755] randomized 5,179 patients with stable coronary disease and moderate or severe ischemia to either:
+- Initial invasive strategy (angiography + revascularization when feasible) plus medical therapy
+- Initial conservative strategy (medical therapy alone, with angiography only if medical therapy failed)
+
+**Results over median 3.2 years:**
+- **Primary outcome** (cardiovascular death, MI, hospitalization for unstable angina, heart failure, or resuscitated cardiac arrest): No significant difference
+  - At 6 months: 5.3% (invasive) vs 3.4% (conservative) - actually favoring conservative initially
+  - At 5 years: 16.4% (invasive) vs 18.2% (conservative) - difference not statistically significant (95% CI: -4.7 to 1.0)
+- **Key secondary outcome** (cardiovascular death or MI): Similar results between groups
+
+### Symptom Relief: The ORBITA-2 Trial
+The ORBITA-2 trial [PMID: 38015442] specifically examined whether PCI relieves angina better than placebo in a double-blind, randomized controlled trial of 301 patients with stable angina who **stopped all antianginal medications** before randomization.
+
+This study demonstrated that while PCI can provide symptom relief, the placebo effect is substantial, and the trial was designed to isolate the true benefit of the procedure itself.
+
+## Additional Context
+
+### Revascularization Strategy Comparisons
+A pooled analysis of 11,518 patients [PMID: 29478841] compared CABG versus PCI with stenting (though not specifically addressing conservative therapy), showing differences in mortality between revascularization strategies over 3.8 years of follow-up. This highlights that when revascularization is chosen, the method matters.
+
+### PCI Success Rates
+Contemporary data from Australia [PMID: 34331500] shows that 6% of single-lesion PCIs are unsuccessful, with these cases associated with higher in-hospital and 30-day mortality and MACE. Unsuccessful PCI patients were more likely to have procedures performed for stable angina.
+
+## Clinical Implications
+
+1. **No mortality benefit**: PCI does not reduce death or major cardiovascular events compared to optimal medical therapy in stable CAD
+2. **Early hazard**: There may be a small early hazard with invasive strategy in the first 6 months
+3. **Symptom management**: PCI may provide symptom relief, but this must be weighed against procedural risks
+4. **Patient selection**: Medical therapy should be optimized first, with PCI reserved for patients with refractory symptoms despite optimal medical management
+
+## Confidence Level and Limitations
+
+**High confidence** for the primary findings regarding hard outcomes (mortality, MI) based on:
+- Large, well-designed randomized controlled trial (ISCHEMIA)
+- Placebo-controlled evidence (ORBITA-2)
+- Consistent findings across studies
+
+**Limitations:**
+- Follow-up duration in ISCHEMIA was median 3.2 years; longer-term outcomes beyond 5 years are less certain
+- Results apply to stable CAD patients; acute coronary syndromes were excluded
+- Quality of life and angina-specific outcomes require individual patient consideration
+
+======================================================================
+======================================================================
+
+SORU 13: What is the evidence for using beta-blockers in elderly patients with hypertension and multiple comorbidities?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: What is the evidence for using beta-blockers in elderly patients with hypertension and multiple comorbidities?
+Timestamp: 2025-10-10T00:00:05.549792
+
+RETRIEVAL SUMMARY:
+  Original query: What is the evidence for using beta-blockers in elderly patients with hypertension and multiple comorbidities?
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 2,419
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Evidence for Beta-Blockers in Elderly Patients with Hypertension and Multiple Comorbidities
+
+## Direct Answer
+
+The evidence for beta-blockers in elderly hypertensive patients with multiple comorbidities is **context-dependent** and shows that while beta-blockers have established benefits in specific cardiovascular conditions, their role as primary antihypertensive agents in this population requires careful individualization.
+
+## Key Evidence
+
+### Beta-Blockers in Combination Therapy
+
+Beta-blockers combined with ACE inhibitors show promise across the cardiovascular continuum due to their complementary mechanisms targeting the sympathetic nervous system and renin-angiotensin-aldosterone system [PMID: 34533690]. This combination is particularly relevant for elderly patients with multiple comorbidities, as beta-blockers provide benefits beyond blood pressure control, including management of arrhythmias, angina pectoris, and heart failure, while ACE inhibitors offer cardioprotection in acute coronary syndromes and heart failure [PMID: 34533690].
+
+### Special Considerations in Elderly Populations
+
+**Individualized Approach Required:** Management of hypertension in elderly and frail patients necessitates specific evaluation of individual comorbidities, assessment of frailty domains, and weighted consideration of drug use to determine appropriate therapy [PMID: 35904720]. Blood pressure targets in this population are not completely defined, emphasizing the need for personalized treatment strategies [PMID: 35904720].
+
+**Frailty Impact:** Frailty and hypertension frequently coexist in older adults, with frailty negatively impacting blood pressure management and prognosis [PMID: 39006023]. The management of hypertension in frail elderly patients faces significant challenges, and there is limited research on efficacious management strategies in this specific population [PMID: 39006023].
+
+**Treatment Principles:** Slow and careful uptitration of antihypertensive therapy is recommended for elderly subjects, particularly in older frail individuals where potential complications require careful monitoring [PMID: 36402573]. Despite these challenges, pharmacotherapy of hypertension in elderly patients is generally highly beneficial, with demonstrated decreases in cardiovascular events and mortality [PMID: 36402573].
+
+### Heart Failure Comorbidity
+
+Beta-blockers represent a mainstay in treating heart failure with reduced ejection fraction (HFrEF), though underuse is still reported [PMID: 33941435]. This is particularly relevant for elderly patients with hypertension and concurrent heart failure.
+
+## Confidence Level and Limitations
+
+**Moderate confidence** with important limitations:
+- No full-text articles were retrieved, limiting detailed evidence on specific beta-blocker outcomes
+- Limited direct evidence specifically addressing beta-blockers as first-line therapy in elderly hypertensive patients
+- The retrieved literature emphasizes individualization but lacks specific guidelines for beta-blocker use in this population
+- More research is needed on optimal management strategies for frail elderly patients with hypertension
+
+**Clinical Implication:** Beta-blockers should be considered in elderly hypertensive patients when specific comorbidities (heart failure, coronary artery disease, arrhythmias) are present, preferably in combination therapy, with careful dose titration and monitoring for frailty-related complications.
+
+======================================================================
+======================================================================
+
+SORU 14: What are the benefits and harms of PCSK9 inhibitors for secondary prevention in very high-risk patients?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: What are the benefits and harms of PCSK9 inhibitors for secondary prevention in very high-risk patients?
+Timestamp: 2025-10-10T00:00:19.851194
+
+RETRIEVAL SUMMARY:
+  Original query: What are the benefits and harms of PCSK9 inhibitors for secondary prevention in very high-risk patients?
+  Expanded query: What are the benefits and harms of PCSK9 PCSK9 inhibitors PCSK9i inhibitors for secondary prevention in very high-risk patients?
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 3,462
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# PCSK9 Inhibitors for Secondary Prevention in Very High-Risk Patients
+
+## Benefits
+
+### Cardiovascular Outcomes
+PCSK9 inhibitors (evolocumab and alirocumab) demonstrate significant cardiovascular benefits when added to maximally tolerated statin therapy in very high-risk patients:
+
+**Major Cardiovascular Events:**
+- Both evolocumab and alirocumab reduce cardiovascular events in patients with established atherosclerotic cardiovascular disease (ASCVD) [PMID: 31593483]
+- Alirocumab specifically reduces cardiovascular events in patients with recent acute coronary syndrome when added to maximally tolerated statins [PMID: 31593483]
+- Network meta-analysis shows PCSK9 inhibitors reduce non-fatal myocardial infarction (MI) (RR 0.87, 95% CI 0.80-0.94) when added to statins [PMID: 35508321]
+
+**LDL-Cholesterol Reduction:**
+- Dose-dependent LDL-C lowering up to 60% [PMID: 36739653]
+- Substantial and durable reductions in LDL-C levels [PMID: 31593483]
+
+**Plaque Effects:**
+- Evidence of regression and stabilization of coronary atherosclerosis demonstrated in trials (GLAGOV, HUYGENS, PACMAN-AMI) [PMID: 36739653]
+
+## Harms and Safety Profile
+
+### Overall Safety
+The safety profile of PCSK9 inhibitors appears favorable:
+
+**General Adverse Events:**
+- No significant differences between PCSK9 inhibitors and controls for treatment-related adverse events, serious adverse events, neurocognitive/neurologic adverse events, or diabetes-related adverse events in overall analysis [PMID: 36704607]
+- Long-term adverse event incidence: 75.1% (95% CI, 71.2%-78.7%), with serious events at 16.2% (95% CI, 11.6%-22.3%) [PMID: 36704607]
+
+**Specific Safety Findings:**
+- Alirocumab showed a significant *reduction* in serious adverse events compared to controls (RR = 0.937; 95% CI, 0.896-0.980) [PMID: 36704607]
+- Alirocumab also reduced diabetes-related adverse events (RR = 0.914; 95% CI, 0.845-0.987) [PMID: 36704607]
+- No significant safety concerns regarding influenza, hypertension, type 2 diabetes, or cancer [PMID: 33078867]
+
+## Confidence Level and Limitations
+
+**High confidence** for cardiovascular benefits based on large randomized controlled trials (FOURIER, ODYSSEY Outcomes) with adequate follow-up [PMID: 31593483, 36739653].
+
+**Limitations:**
+- Most evidence comes from patients already on maximally tolerated statin therapy
+- Long-term safety data beyond trial durations continues to accumulate
+- Cost-effectiveness considerations not addressed in these clinical studies
+
+The evidence strongly supports PCSK9 inhibitors as effective and safe additions to statin therapy for secondary prevention in very high-risk patients, with substantial cardiovascular benefits and a reassuring safety profile.
+
+======================================================================
+======================================================================
+
+SORU 15: In patients with aortic stenosis, how do transcatheter aortic valve replacement (TAVR) and surgical AVR compare for low-risk older adults?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: In patients with aortic stenosis, how do transcatheter aortic valve replacement (TAVR) and surgical AVR compare for low-risk older adults?
+Timestamp: 2025-10-10T00:00:32.824566
+
+RETRIEVAL SUMMARY:
+  Original query: In patients with aortic stenosis, how do transcatheter aortic valve replacement (TAVR) and surgical AVR compare for low-risk older adults?
+  Expanded query: In patients with aortic stenosis, how do transcatheter aortic valve replacement (TAVR) transcatheter aortic valve replacement TAVR and surgical AVR compare for low-risk older adults?
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 2,967
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Answer: TAVR vs. Surgical AVR in Low-Risk Older Adults with Aortic Stenosis
+
+## Direct Answer
+
+In low-risk older adults with severe aortic stenosis, TAVR demonstrates **comparable or superior outcomes** to surgical AVR (SAVR) based on recent randomized controlled trial evidence.
+
+## Key Findings
+
+### Mortality and Major Outcomes (4+ Years Follow-up)
+A meta-analysis of 3 RCTs including 2,644 low-risk patients (mean age 74.3 years) found **no significant difference** between TAVR and SAVR in:
+- All-cause mortality
+- Cardiovascular mortality
+- Stroke
+- Myocardial infarction
+- Aortic valve reintervention
+[PMID: 38876333]
+
+### Short to Medium-Term Outcomes (30 days to 2 years)
+Across the entire surgical risk spectrum including low-risk patients, TAVR showed:
+- **Reduced all-cause mortality** compared to SAVR (HR 0.88, 95% CI 0.78-0.99, P=0.030), with consistent effects across all risk levels [PMID: 31329852]
+- **Lower composite rate** of all-cause death or stroke at 30 days (RR 0.70, P=0.003) and 1 year (RR 0.77, P=0.033) [PMID: 40425422]
+
+### Procedural Complications
+
+**TAVR advantages:**
+- Lower bleeding complications
+- Less new-onset atrial fibrillation
+- Reduced acute kidney injury
+- Less severe patient-prosthesis mismatch
+[PMID: 40425422]
+
+**TAVR disadvantages:**
+- Higher permanent pacemaker implantation rates
+- Increased major vascular complications
+- More paravalvular leak
+- Higher aortic valve reintervention rates
+[PMID: 40425422, 38876333]
+
+## Clinical Implications
+
+TAVR is now considered a **safe and effective alternative** to SAVR in low-surgical-risk patients, with the choice depending on individual patient anatomy, comorbidities, and preference regarding specific risk profiles [PMID: 38876333, 40044299].
+
+### Confidence Level
+**High confidence** for short to medium-term outcomes (1-4 years) based on multiple RCTs. **Moderate confidence** for longer-term durability, as data beyond 4 years in low-risk populations remains limited [PMID: 38876333].
+
+======================================================================
+======================================================================
+
+SORU 16: What is the initial emergency management of suspected acute aortic dissection in the emergency department?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: What is the initial emergency management of suspected acute aortic dissection in the emergency department?
+Timestamp: 2025-10-10T00:00:45.598427
+
+RETRIEVAL SUMMARY:
+  Original query: What is the initial emergency management of suspected acute aortic dissection in the emergency department?
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 2,677
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Initial Emergency Management of Suspected Acute Aortic Dissection
+
+Based on the available evidence, the initial emergency department management of suspected acute aortic dissection focuses on three key priorities:
+
+## Immediate Management
+
+**1. Aggressive Blood Pressure Control**
+Current therapeutic guidelines recommend aggressive blood pressure lowering as a cornerstone of medical management for patients with acute aortic dissection [PMID: 30456591]. This is critical to prevent extension of the dissection and reduce wall stress.
+
+**2. Pain Control**
+Adequate analgesia, including the use of narcotics, is essential in the initial management [PMID: 39198144]. Pain control not only provides patient comfort but also helps reduce sympathetic stimulation that can elevate blood pressure.
+
+**3. Rapid Diagnosis**
+Selective testing with Computed Tomography Angiography (CTA) is the key diagnostic modality for confirming acute aortic dissection [PMID: 38708978]. The challenge lies in identifying which patients warrant CTA among the many presenting with chest, back, or abdominal pain.
+
+## Subsequent Actions
+
+**4. Urgent Surgical Consultation or Transfer**
+Once diagnosed, urgent surgery or immediate transfer to a facility capable of cardiovascular surgery must occur with minimal delay [PMID: 38708978]. This is particularly critical for Stanford type A dissections (involving the ascending aorta), which require emergency surgical intervention [PMID: 39198144].
+
+**5. Risk Stratification**
+The location and extension of the initial intimal tear, along with the size of affected aortic segments, determines whether emergency surgery, endovascular intervention, or optimal medical treatment is indicated [PMID: 36640801].
+
+## Clinical Considerations
+
+The diagnosis is often missed because acute aortic dissection is not considered in the differential diagnosis [PMID: 38708978]. Clinical decision tools like the ADD-RS (Aortic Dissection Detection Risk Score) combined with age-adjusted D-dimer can aid in screening, with reported sensitivity of 92.5% [PMID: 37800065].
+
+**Confidence Level:** High for the core management principles (blood pressure control, analgesia, urgent intervention), based on guideline recommendations cited in multiple papers. However, the evidence provided is primarily from review articles and observational studies rather than randomized controlled trials, which reflects the ethical challenges of studying this life-threatening condition.
+
+======================================================================
+======================================================================
+
+SORU 17: How should cardiogenic shock be stabilized and what are the indications for mechanical circulatory support?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: How should cardiogenic shock be stabilized and what are the indications for mechanical circulatory support?
+Timestamp: 2025-10-10T00:01:00.195153
+
+RETRIEVAL SUMMARY:
+  Original query: How should cardiogenic shock be stabilized and what are the indications for mechanical circulatory support?
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 2,635
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Stabilization of Cardiogenic Shock and Indications for Mechanical Circulatory Support
+
+## Initial Stabilization Approach
+
+Cardiogenic shock stabilization follows a systematic approach with **early recognition and treatment being crucial**, as short-term mortality remains 40-50% [PMID: 38872375].
+
+### Key Stabilization Components:
+
+1. **Early Revascularization**: In acute myocardial infarction-related cardiogenic shock (AMI-CS), early revascularization of the culprit lesion with possible staged revascularization is essential [PMID: 38872375, 39550175].
+
+2. **Hemodynamic Management**: 
+   - Optimal volume management and vasoactive drugs titrated to restore arterial pressure and perfusion are the cornerstone of therapy [PMID: 38872375]
+   - Vasoactive drugs should be limited to the shortest duration and lowest possible dose [PMID: 38872375]
+   - Choice of vasoactive drugs depends on the underlying cause and phenotype of cardiogenic shock [PMID: 38872375]
+
+3. **Hemodynamic Monitoring**: 
+   - Pulmonary artery catheter (PAC) assessment should be considered early in patients not responding to initial therapy or with unclear shock, as it has been associated with improved outcomes [PMID: 38872375]
+   - Complete hemodynamic profiling enables phenotype-guided tailoring of support [PMID: 38518863]
+
+4. **Therapeutic Phases**: Management follows the R-O-S-E framework:
+   - **Rescue** (initial stabilization)
+   - **Optimization** 
+   - **Stabilization**
+   - **De-Escalation or Exit therapy** [PMID: 38518863]
+
+## Indications for Mechanical Circulatory Support (MCS)
+
+While specific indications are evolving, the following principles guide MCS use:
+
+### General Considerations:
+
+- **Patient Selection and Timing**: These are crucial elements for success [PMID: 33663742]
+- Evidence shows improved survival with temporary circulatory support in **selected patients** [PMID: 39550175]
+- MCS should be considered when pharmacological therapy alone is insufficient to restore adequate perfusion [PMID: 38872375]
+
+### Device Selection Strategy:
+
+The choice of temporary MCS device should be based on:
+- Underlying cause of cardiogenic shock
+- Hemodynamic phenotype
+- Severity staging [PMID: 35862152, 38518863]
+
+## Important Limitations
+
+**Critical Evidence Gap**: Despite dramatic increases in temporary MCS use, there is a **lack of randomized controlled trials** guiding clinical decision-making [PMID: 35862152]. Current evidence is largely from observational studies, and numerous questions remain unanswered regarding optimal pharmacotherapy regimens, the specific role of MCS devices, and best supportive care approaches [PMID: 39550175].
+
+The American Heart Association has published pragmatic suggestions for device selection, escalation, and weaning strategies to serve as a resource until more robust randomized clinical data become available [PMID: 35862152].
+
+**Confidence Level**: Moderate - recommendations are based on expert consensus and observational evidence rather than high-quality randomized controlled trials.
+
+======================================================================
+======================================================================
+
+SORU 18: What is the recommended pharmacologic and procedural approach to unstable ventricular tachycardia in the cath lab?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: What is the recommended pharmacologic and procedural approach to unstable ventricular tachycardia in the cath lab?
+Timestamp: 2025-10-10T00:01:15.838232
+
+RETRIEVAL SUMMARY:
+  Original query: What is the recommended pharmacologic and procedural approach to unstable ventricular tachycardia in the cath lab?
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 2,912
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Management of Unstable Ventricular Tachycardia in the Cath Lab
+
+## Direct Answer
+
+For unstable ventricular tachycardia (VT) in the cath lab, the recommended approach prioritizes **immediate electrical cardioversion** for hemodynamically unstable patients, followed by pharmacologic stabilization and consideration of catheter ablation for refractory cases.
+
+## Pharmacologic Management
+
+### First-Line Agents
+
+**Amiodarone** remains the primary antiarrhythmic drug for acute unstable VT, particularly when accompanied by hemodynamic perturbations [PMID: 36878200]. It is widely used for managing serious ventricular arrhythmias in the acute setting, though it has limitations for long-term use due to toxicity concerns.
+
+**Beta-blockers** are a mainstay treatment for symptomatic VT and should be administered at maximally tolerated doses [PMID: 29716709]. They are relatively safe, well-tolerated, and provide additional benefits in patients with coronary heart disease and left ventricular systolic dysfunction [PMID: 36878200].
+
+### Refractory Cases
+
+For VT refractory to first-line agents, understanding second and third-line treatments is vital rather than relying solely on initial medications [PMID: 37969159]. The management protocol should include:
+- Treatment of reversible causes
+- Ventilatory and hemodynamic support
+- Administration of antiarrhythmic drugs
+- Maximally tolerated doses of beta-blockers [PMID: 29716709]
+
+## Procedural Approach
+
+### Catheter Ablation
+
+**Radiofrequency ablation (RFA)** guided by electroanatomic mapping (EAM) is indicated for refractory unstable VT, particularly in post-myocardial infarction patients [PMID: 29716709]. 
+
+**Mapping Techniques:** Four basic mapping techniques guide VT ablation:
+- Activation mapping
+- Entrainment mapping
+- Pace mapping
+- Substrate mapping [PMID: 31857035]
+
+**Target Sites:** Ablation targets include:
+- Late potentials
+- Fractionated electrograms
+- Double potentials
+- Channels within scar tissue [PMID: 29716709]
+
+### Clinical Outcomes
+
+In a case series of post-MI patients with electrical storm (≥3 episodes of sustained VT within 24 hours), endocardial substrate modification achieved:
+- 83.3% survival to discharge
+- 80% VT-free survival at mean follow-up of 30 months
+- No hospitalizations related to VT during follow-up [PMID: 29716709]
+
+## Special Considerations
+
+**Electrical Storm:** This life-threatening condition (mortality up to 14% in first 48 hours) requires aggressive management with the combined pharmacologic and procedural approach described above [PMID: 37969159].
+
+**Contraindications:** Class Ic agents should be avoided in patients with prior myocardial infarction, ischemic scar, or heart failure [PMID: 36878200].
+
+## Confidence Level and Limitations
+
+**Moderate-to-High Confidence:** The evidence supports a combined pharmacologic-procedural approach, though most data comes from observational studies and case series rather than large randomized trials. Current recommendations typically reserve catheter ablation for patients who have failed or cannot tolerate antiarrhythmic therapy [PMID: 31857035]. The cath lab setting provides immediate access to both hemodynamic support and ablation capabilities, making it an ideal environment for managing unstable VT with this integrated approach.
+
+======================================================================
+======================================================================
+
+SORU 19: What are best practices for perioperative management of antiplatelet and anticoagulant therapy in patients undergoing non-cardiac surgery?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: What are best practices for perioperative management of antiplatelet and anticoagulant therapy in patients undergoing non-cardiac surgery?
+Timestamp: 2025-10-10T00:01:30.411521
+
+RETRIEVAL SUMMARY:
+  Original query: What are best practices for perioperative management of antiplatelet and anticoagulant therapy in patients undergoing non-cardiac surgery?
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 2,748
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Best Practices for Perioperative Management of Antiplatelet and Anticoagulant Therapy in Non-Cardiac Surgery
+
+## Direct Answer
+
+The perioperative management of antiplatelet and anticoagulant therapy requires balancing thrombotic risk (particularly in patients with coronary stents) against bleeding risk, with individualized decision-making based on both patient and procedural factors.
+
+## Key Evidence-Based Recommendations
+
+### Timing of Surgery After Stent Placement
+
+**ACC/AHA guidelines recommend postponing elective non-cardiac surgery at least 3 months after stent implantation** [PMID: 29321066]. This delay is critical as 5-25% of patients undergoing coronary stent implantation require non-cardiac surgery within 2 years, making surgery the most common reason for premature cessation of dual antiplatelet therapy (DAPT) [PMID: 32759962].
+
+### Antiplatelet Management Strategy
+
+**For patients with coronary stents:**
+- ACC/AHA guidelines recommend **continuing at least aspirin throughout the perioperative period**
+- Ideally, **continue DAPT "unless surgery demands discontinuation"** [PMID: 29321066]
+- Management necessitates concomitant evaluation of individual thrombotic and bleeding risks related to both clinical and procedural factors [PMID: 32759962]
+
+### Risk Assessment Approach
+
+The 2022 ESC guidelines emphasize:
+- **Complex cardiovascular risk assessment** before surgery
+- Prediction of cardiovascular complications
+- Indication of basic paraclinical examinations and biomarkers
+- Adjustments to anticoagulant and antiplatelet therapy based on individual patient profiles [PMID: 36931877]
+
+### Decision-Making Framework
+
+Perioperative management should consider:
+1. **Patient factors**: History of coronary disease, type of stent (bare metal vs. drug-eluting), time since stent placement
+2. **Procedural factors**: Bleeding risk of the specific surgery, urgency of procedure
+3. **Medication factors**: Type of antiplatelet therapy (aspirin alone vs. DAPT), specific P2Y12 inhibitor used
+
+[PMID: 32759962, 35048599]
+
+## Evidence Limitations
+
+**Current guidelines do not provide detailed recommendations on this topic, and the optimal approach is yet to be determined** [PMID: 32759962]. The evidence base consists primarily of observational studies with limited randomized controlled trial data [PMID: 29321066, 37838696]. Management decisions often require case-by-case evaluation given conflicting data regarding the most beneficial perioperative strategy [PMID: 32759962].
+
+## Confidence Level
+
+**Moderate confidence** - While general principles are well-established (continue aspirin when possible, delay surgery after stenting), specific management strategies require individualized assessment. The lack of detailed guideline recommendations and limited high-quality evidence necessitates multidisciplinary discussion between surgeons, cardiologists, and anesthesiologists for optimal patient care.
+
+======================================================================
+======================================================================
+
+SORU 20: Which sepsis-like presentations should prompt consideration of infective endocarditis and which immediate investigations are indicated?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: Which sepsis-like presentations should prompt consideration of infective endocarditis and which immediate investigations are indicated?
+Timestamp: 2025-10-10T00:01:48.143418
+
+RETRIEVAL SUMMARY:
+  Original query: Which sepsis-like presentations should prompt consideration of infective endocarditis and which immediate investigations are indicated?
+  Abstracts found: 10
+  Full-text sections: 1
+  Routing: low_confidence
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 2,568
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Sepsis-like Presentations Prompting Consideration of Infective Endocarditis
+
+## Clinical Presentations Requiring IE Suspicion
+
+Infective endocarditis (IE) presents with highly variable and often nonspecific symptoms that can mimic sepsis. Based on the available evidence, clinicians should consider IE when patients present with:
+
+**Key Clinical Features:**
+- **Fever with multisystemic involvement**: IE can affect almost any organ system, presenting with dermatological, ophthalmic, cardiovascular, or renal manifestations [PMID: 35377207, PMID: 35129893]
+- **Spectrum from mild infection to septic shock**: Presentations range from subtle symptoms to multiorgan failure [PMID: 35129893]
+- **Nonspecific symptoms in high-risk patients**: Particularly in elderly patients with chronic disease, cardiac devices, or prosthetic valves [PMID: 35129893]
+
+**High-Risk Patient Groups:**
+- Patients with prosthetic heart valves or cardiac devices [PMID: 31941729, PMID: 39067905]
+- Elderly population with chronic disease [PMID: 35129893]
+- Those with native valve disease or septal defects [PMID: 39067905]
+
+## Immediate Investigations Indicated
+
+When IE is suspected, the following immediate investigations are essential:
+
+**1. Blood Cultures (Priority Investigation)**
+- Must be obtained **prior to antibiotic administration** [PMID: 35129893]
+- Critical for identifying causative organisms and guiding antimicrobial therapy
+
+**2. Echocardiography**
+- Remains the **pivotal diagnostic modality** for IE [PMID: 39067905]
+- Key diagnostic step alongside blood cultures [PMID: 35129893]
+- Essential for visualizing vegetations and assessing valve involvement
+
+**3. Clinical Assessment**
+- Thorough history and physical examination are helpful initial steps [PMID: 35129893]
+
+## Diagnostic Challenges and Recommendations
+
+The diagnosis of IE is challenging and relies on the integration of clinical, imaging, and microbiological features [PMID: 35377207]. The presentation often remains subtle, and the diagnosis is frequently missed, contributing to high mortality rates [PMID: 35129893, PMID: 35636519].
+
+**Critical Points:**
+- Early clinical suspicion is essential to enable correct treatment pathways and reduce complications [PMID: 31941729]
+- Rapid diagnosis requires a multidisciplinary team approach involving cardiologists, infectious disease specialists, microbiologists, and other specialists [PMID: 35636519, PMID: 39067905]
+- Alternative imaging modalities are gaining significance when echocardiography is inconclusive [PMID: 39067905]
+
+## Confidence Level and Limitations
+
+**High confidence** regarding the importance of blood cultures before antibiotics and echocardiography as key diagnostic steps. **Moderate confidence** regarding specific clinical presentations, as the literature emphasizes the heterogeneous and nonspecific nature of IE presentations rather than providing detailed clinical criteria. The evidence consistently highlights that IE remains a diagnostic challenge with variable presentations, requiring high clinical suspicion in appropriate contexts.
+
+======================================================================
+======================================================================
+
+SORU 21: How should heart failure be managed during pregnancy, and what cardiovascular drugs are contraindicated?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: How should heart failure be managed during pregnancy, and what cardiovascular drugs are contraindicated?
+Timestamp: 2025-10-10T00:02:01.192287
+
+RETRIEVAL SUMMARY:
+  Original query: How should heart failure be managed during pregnancy, and what cardiovascular drugs are contraindicated?
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 2,458
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Management of Heart Failure During Pregnancy and Contraindicated Cardiovascular Drugs
+
+## Heart Failure Management
+
+Based on the available evidence, heart failure during pregnancy can be managed with several medications that have demonstrated relative safety:
+
+**Safe Heart Failure Medications:**
+- **Beta-blockers** - relatively safe and can be used effectively [PMID: 30407107]
+- **Furosemide** (loop diuretic) - relatively safe and can be used effectively [PMID: 30407107]
+- **Digoxin** - relatively safe and can be used effectively [PMID: 30407107]
+
+These medications should be selected carefully, as pregnancy significantly affects pharmacokinetic and pharmacodynamic properties, potentially altering medication efficacy and metabolism [PMID: 30407107].
+
+## Contraindicated Cardiovascular Drugs
+
+**Strictly Contraindicated:**
+- **Renin-angiotensin-aldosterone system (RAAS) inhibitors** - These medications are teratogenic and strictly contraindicated during pregnancy [PMID: 30407107, PMID: 33632659]. While beneficial in the general population for heart failure, they pose significant fetal risks.
+
+**Not Recommended:**
+- **Atenolol and other beta-blockers** (when used specifically for antihypertensive purposes) - not recommended during pregnancy [PMID: 33632659]
+- **Diuretics** (for hypertension management) - not recommended [PMID: 33632659]
+
+## Additional Considerations
+
+For hypertension management in pregnant patients with cardiovascular disease, the 2017 ACC/AHA guidelines recommend transitioning to **methyldopa, nifedipine, or labetalol** [PMID: 30407107].
+
+Cardiovascular medications can enter breast milk, requiring careful drug selection during lactation [PMID: 30407107]. During postpartum and breastfeeding, amlodipine and enalapril are considered safe with minimal breast milk excretion [PMID: 33632659].
+
+## Confidence Level and Limitations
+
+**High confidence** regarding RAAS inhibitor contraindication and the relative safety of beta-blockers, furosemide, and digoxin for heart failure management. However, **limitations exist** as no full-text articles were available for detailed protocols, and specific dosing strategies or monitoring parameters were not provided in the abstracts reviewed. Multidisciplinary management by a heart team is recommended for pregnant women with cardiovascular disease [PMID: 35659955].
+
+======================================================================
+======================================================================
+
+SORU 22: What are device therapy indications for cardiac resynchronization therapy (CRT) and implantable cardioverter-defibrillator (ICD) in primary prevention?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: What are device therapy indications for cardiac resynchronization therapy (CRT) and implantable cardioverter-defibrillator (ICD) in primary prevention?
+Timestamp: 2025-10-10T00:02:18.181688
+
+RETRIEVAL SUMMARY:
+  Original query: What are device therapy indications for cardiac resynchronization therapy (CRT) and implantable cardioverter-defibrillator (ICD) in primary prevention?
+  Expanded query: What are device therapy indications for cardiac resynchronization therapy (CRT) cardiac resynchronization therapy CRT and implantable cardioverter-defibrillator (ICD) implantable cardioverter defibrillator ICD in primary
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 3,907
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Device Therapy Indications for CRT and ICD in Primary Prevention
+
+Based on the available research, here are the key indications and considerations for primary prevention device therapy:
+
+## Primary Prevention ICD Indications
+
+**Core Criteria:**
+The research consistently identifies patients with heart failure and reduced ejection fraction (HFrEF) as candidates for primary prevention ICD therapy [PMID: 37680559]. However, the benefit varies based on several factors:
+
+**Key Predictive Factors for ICD Benefit:**
+- **Male gender** (HR 1.97) [PMID: 29016821]
+- **Baseline LV end-systolic diameter** (HR 1.03 per mm) [PMID: 29016821]
+- **Higher baseline ejection fraction** (HR 1.03 per %) [PMID: 29016821]
+- **Secondary prevention indication** confers higher risk (HR 2.09) [PMID: 29016821]
+
+## CRT-D (Combined CRT and ICD) Indications
+
+**Primary Prevention Benefit:**
+CRT-D patients demonstrated a prominent adjusted survival benefit (HR 0.52, 95% CI 0.50-0.55, p<0.0001) compared to no device [PMID: 32032927].
+
+**Risk Stratification:**
+The Seattle Proportional Risk Model (SPRM) can help identify patients who may not require ICD functionality. Patients with:
+- SHFM-predicted 4-year survival ≥81% (median)
+- Low SPRM-predicted probability of arrhythmic death ≤42% (median)
+
+These patients had an absolute adjusted risk reduction from ICD functionality of only 0.95%/year, with 70% of survival benefit attributable to CRT pacing alone [PMID: 32032927].
+
+## Special Considerations
+
+**Super-Responders:**
+Patients achieving post-CRT ejection fraction ≥50% (super-responders, occurring in 5.9% of cases) had significantly lower rates of:
+- 5-year antitachycardia pacing: 2.7% vs 22.1% (p=0.004)
+- 5-year appropriate ICD shock: 2.7% vs 14.3% (p=0.03) [PMID: 29016821]
+
+**Advanced Chronic Kidney Disease:**
+The benefit of ICD in patients with advanced CKD (Stage 3b-5) who are CRT recipients may be attenuated due to competing risk of non-arrhythmic death [PMID: 37680559].
+
+**Cancer Patients:**
+Among cancer patients eligible for primary prevention devices:
+- Only 27% underwent implantation
+- Independent predictors for implantation included CRT indication (OR 8.42, p<0.001) and intermediate/high MADIT-ICD Benefit scores (OR 3.74, p=0.040) [PMID: 36634547]
+
+**Device Replacement:**
+At CRT-D replacement, patients without persistent ICD indication still had a sustained ventricular arrhythmic event rate of 5.7% at 2 years, with persistent ICD indication being a strong predictor of subsequent events (HR 3.6, p=0.003) [PMID: 36459310].
+
+## Confidence Level and Limitations
+
+**High confidence** for general indications in HFrEF patients. However, the provided papers focus more on outcomes and risk stratification rather than comprehensive guideline-based indications. Specific LVEF thresholds, QRS duration criteria, and NYHA class requirements—which are standard components of CRT/ICD guidelines—are not explicitly detailed in these papers. The evidence emphasizes the importance of individualized risk assessment using validated models like MADIT-ICD Benefit scores and SPRM for optimal patient selection.
+
+======================================================================
+======================================================================
+
+SORU 23: How to manage anticoagulation in patients with atrial fibrillation who have recent gastrointestinal bleeding?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: How to manage anticoagulation in patients with atrial fibrillation who have recent gastrointestinal bleeding?
+Timestamp: 2025-10-10T00:02:36.711116
+
+RETRIEVAL SUMMARY:
+  Original query: How to manage anticoagulation in patients with atrial fibrillation who have recent gastrointestinal bleeding?
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 3,278
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Management of Anticoagulation in Atrial Fibrillation Patients with Recent Gastrointestinal Bleeding
+
+## Direct Answer
+
+Managing anticoagulation in AF patients with recent gastrointestinal bleeding (GIB) requires careful individualized risk-benefit assessment. The available evidence suggests that anticoagulation can be resumed after GIB, but decisions must balance stroke prevention against rebleeding risk.
+
+## Evidence-Based Recommendations
+
+### 1. **Anticoagulation Resumption After GIB**
+
+A prospective study of 137 AF patients presenting with overt GIB found that both anticoagulant monotherapy and combination anticoagulant-antiplatelet therapy showed **no statistically significant differences in rebleeding rates, major bleeding, or mortality** during median 57-month follow-up [PMID: 39388664]. This suggests anticoagulation can be safely resumed after appropriate management of the bleeding source.
+
+### 2. **Risk Factors to Consider**
+
+When deciding on anticoagulation resumption, key risk factors include:
+- **Chronic kidney disease** (HR 2.05, 95% CI 1.04-4.05, p=0.038) - associated with increased mortality risk [PMID: 39388664]
+- **Warfarin use** (HR 4.94, 95% CI 1.11-22.09, p=0.037) - associated with worse outcomes compared to other anticoagulants [PMID: 39388664]
+
+### 3. **Choice of Anticoagulant**
+
+Direct oral anticoagulants (DOACs) are generally preferred over vitamin K antagonists (VKAs) in AF patients, with **similar or better efficacy/safety profiles and reduced risk of intracerebral hemorrhage** [PMID: 36244055]. The specific DOAC choice should be individualized based on patient characteristics, renal function, and bleeding risk [PMID: 36244055].
+
+### 4. **Individual Risk Assessment**
+
+Management should include:
+- **CHA₂DS₂-VASc score** assessment for stroke risk [PMID: 29518801]
+- **Bleeding risk evaluation** using validated tools
+- Consideration of the **bleeding source** and whether it has been definitively treated
+- Assessment of comorbidities (coronary artery disease, renal function, age) [PMID: 39388664]
+
+### 5. **Combination Therapy Considerations**
+
+For patients requiring both anticoagulation and antiplatelet therapy (e.g., those with coronary stents), the combination does not appear to significantly increase rebleeding risk compared to anticoagulation alone, though these patients typically have higher cardiovascular risk [PMID: 39388664].
+
+## Clinical Approach
+
+1. **Temporarily hold anticoagulation** during acute GIB
+2. **Identify and treat the bleeding source** endoscopically or surgically
+3. **Reassess stroke risk** (CHA₂DS₂-VASc score) versus bleeding risk
+4. **Consider DOAC over warfarin** for resumption when appropriate
+5. **Individualize timing** of anticoagulation resumption based on bleeding severity and source control
+
+## Confidence Level and Limitations
+
+**Moderate confidence** - The evidence is primarily from one prospective observational study with good follow-up [PMID: 39388664], supplemented by general guidance on DOAC safety [PMID: 36244055]. However, **clear guidelines are lacking** [PMID: 29518801], and no randomized controlled trials specifically address optimal timing or choice of anticoagulation resumption after GIB in AF patients. The decision remains highly individualized, requiring careful assessment of each patient's thrombotic and bleeding risks.
+
+======================================================================
+======================================================================
+
+SORU 24: What is the evidence-based approach to lipid-lowering therapy in patients with chronic kidney disease?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: What is the evidence-based approach to lipid-lowering therapy in patients with chronic kidney disease?
+Timestamp: 2025-10-10T00:02:54.121067
+
+RETRIEVAL SUMMARY:
+  Original query: What is the evidence-based approach to lipid-lowering therapy in patients with chronic kidney disease?
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 2,944
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Evidence-Based Approach to Lipid-Lowering Therapy in Chronic Kidney Disease
+
+## Direct Answer
+
+The evidence-based approach to lipid-lowering therapy in CKD varies significantly by disease stage, with statin therapy being the cornerstone for non-dialysis CKD patients but showing limited benefit in dialysis patients.
+
+## Key Recommendations by CKD Stage
+
+### Non-Dialysis CKD Patients
+
+**Statin Therapy:**
+- **Adults >50 years with CKD should receive statin therapy** [PMID: 40063957]. This represents updated guidance emphasizing age-based rather than purely risk-factor-based initiation.
+- Statins are beneficial for **prevention of major atherosclerotic events** in patients with CKD [PMID: 30361677]
+- The 2013 KDIGO guidelines presented a **relatively conservative approach** regarding indication and therapeutic monitoring, largely due to lack of high-quality CKD-specific evidence [PMID: 37482655]
+
+### Dialysis Patients
+
+- **LDL cholesterol lowering is NOT beneficial** in patients requiring dialysis [PMID: 30361677]
+- Efficacy of statins appears **less robust across the spectrum of CKD, particularly in hemodialysis patients** [PMID: 29318962]
+- In ESRD patients, LDL cholesterol shows a **negative association with outcomes at below-average levels** and flat/weakly positive association at higher levels [PMID: 30361677]
+
+### Kidney Transplant Recipients
+
+- LDL cholesterol lowering **is beneficial** for prevention of major atherosclerotic events in kidney transplant recipients [PMID: 30361677]
+
+## Characteristic Dyslipidemia Pattern in CKD
+
+Patients with advanced CKD/ESRD typically present with:
+- **Hypertriglyceridemia**
+- **Low HDL cholesterol**
+- **Normal LDL cholesterol levels** [PMID: 30361677]
+
+This differs substantially from the general population's lipid profile.
+
+## Emerging Therapies
+
+**PCSK9 Inhibitors:**
+- **No clinical trials have evaluated efficacy** of PCSK9 inhibitors in preventing cardiovascular events or improving kidney function in CKD or transplant patients [PMID: 36548906]
+- Alternative agents under investigation include PCSK9-siRNA molecules and evinacumab [PMID: 36548906]
+
+**Novel Approaches:**
+- Cyclodextrins and FXR/TGR5 dual agonist (INT-767) show promise for improving renal lipid metabolism disorders
+- Drugs targeting mitochondrial dysfunction may address lipotoxicity in renal disease [PMID: 36548906]
+
+## Safety Considerations
+
+Statin therapy safety in CKD requires careful consideration, though the papers indicate statins are generally safe when appropriately prescribed [PMID: 29318962].
+
+## Confidence Level and Limitations
+
+**High confidence:** Statin benefit in non-dialysis CKD and lack of benefit in dialysis patients
+**Moderate confidence:** Specific age-based recommendations (>50 years)
+**Low confidence:** Optimal monitoring strategies and novel agent efficacy
+
+**Key Limitation:** The 2013 KDIGO guidelines acknowledged controversial aspects due to limited CKD-specific trial data [PMID: 36548906, 37482655]. The 2024 KDIGO update provides more definitive guidance but full evidence details were not available in these abstracts.
+
+======================================================================
+======================================================================
+
+SORU 25: How to evaluate and manage suspected Takotsubo (stress) cardiomyopathy in the acute setting?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: How to evaluate and manage suspected Takotsubo (stress) cardiomyopathy in the acute setting?
+Timestamp: 2025-10-10T00:03:09.084771
+
+RETRIEVAL SUMMARY:
+  Original query: How to evaluate and manage suspected Takotsubo (stress) cardiomyopathy in the acute setting?
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 2,614
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Evaluation and Management of Suspected Takotsubo Cardiomyopathy in the Acute Setting
+
+## Initial Evaluation
+
+**Clinical Presentation:**
+Takotsubo cardiomyopathy (TTC) presents with dramatic clinical features that closely mimic acute myocardial infarction, making careful diagnosis essential [PMID: 32341693]. The syndrome typically follows intense emotional or physical stress and predominantly affects postmenopausal women [PMID: 28824005, PMID: 28917022].
+
+**Diagnostic Approach:**
+
+1. **ECG and Biomarkers:** Initial presentation shows similar ECG changes and cardiac biomarker elevations as acute MI [PMID: 32039951]. These findings alone cannot distinguish TTC from acute coronary syndrome.
+
+2. **Coronary Angiography:** This is the key diagnostic step - TTC often goes undiagnosed until coronary angiography reveals no significant coronary blockage [PMID: 32039951]. The syndrome is characterized by a unique circumferential left (or biventricular) contraction abnormality that extends beyond a single coronary artery territory [PMID: 28917022].
+
+3. **Imaging Features:** The hallmark is apical ballooning appearance of the left ventricle, following the pattern of cardiac sympathetic innervation rather than coronary distribution [PMID: 32341693, PMID: 28917022].
+
+## Acute Management
+
+**Treatment Principles:**
+
+1. **Supportive Care:** The mainstay of therapy is supportive and symptomatic medication with priority given to improving left ventricular function [PMID: 32341693]. Treatment of precipitating factors, predisposing diseases, and complications is fundamental during the acute stage [PMID: 28917022].
+
+2. **Complication Management:** During the acute phase, clinicians must be vigilant for serious complications including:
+   - Arrhythmias
+   - Heart failure and pulmonary edema
+   - Cardiogenic shock
+   - Thromboembolism
+   - Cardiac arrest and rupture [PMID: 28917022]
+
+3. **Pharmacotherapy:** ACE inhibitors and angiotensin II receptor blockers (ARBs) may reduce the likelihood of recurrent episodes [PMID: 32039951].
+
+## Prognosis and Recovery
+
+The overall prognosis is very good, with approximately 95% of patients making a full recovery [PMID: 32039951]. The condition is reversible, with left ventricular function typically improving over several days and full recovery occurring in 3-4 weeks [PMID: 32341693].
+
+## Confidence Level and Limitations
+
+**High confidence** for general diagnostic and management principles based on consistent findings across multiple reviews. However, the evidence notes that **specific therapies for the acute setting remain undefined** [PMID: 28824005], and practical challenges in diagnosis and management persist in clinical practice, potentially leading to underdiagnosis and improper management [PMID: 39417524]. The pathogenesis remains elusive, with multiple proposed mechanisms but no definitive understanding [PMID: 28917022].
+
+======================================================================
+======================================================================
+
+SORU 26: What are screening recommendations for familial hypercholesterolemia and cascade testing in affected families?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: What are screening recommendations for familial hypercholesterolemia and cascade testing in affected families?
+Timestamp: 2025-10-10T00:03:24.344900
+
+RETRIEVAL SUMMARY:
+  Original query: What are screening recommendations for familial hypercholesterolemia and cascade testing in affected families?
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 3,279
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Screening Recommendations for Familial Hypercholesterolemia and Cascade Testing
+
+## Direct Answer
+
+Current recommendations support **universal pediatric lipid screening at ages 9-11 years** combined with **cascade testing of at-risk relatives** as the most effective approach for identifying familial hypercholesterolemia (FH) [PMID: 38708402]. Genetic testing should be integrated as the **standard of care** for patients with definite or probable FH and their relatives [PMID: 30071997].
+
+## Evidence-Based Recommendations
+
+### 1. **Genetic Testing as Standard of Care**
+An international expert panel recommends that FH genetic testing become standard practice for:
+- Patients with definite or probable FH
+- At-risk relatives of affected individuals
+- Testing should include genes encoding LDLR, APOB, and PCSK9 [PMID: 30071997]
+
+### 2. **Cascade Testing Strategy**
+Cascade testing involves systematically screening family members of identified FH patients:
+- **Effectiveness**: Families with identified pathogenic variants (FH<sup>g+</sup>) show significantly higher new case detection (0.92 vs 0.23 cases per index case) compared to those without identified variants [PMID: 36173399]
+- **Uptake rates**: Testing uptake is higher in genetically confirmed families (43.9% vs 21.4%) [PMID: 36173399]
+- **Prognostic benefit**: Patients identified through cascade screening are diagnosed approximately 18 years younger than probands (mean age 38.7 vs 57.0 years) and show reduced risk for major adverse cardiac events (HR = 0.67; 95% CI = 0.44-0.90) [PMID: 33461934]
+
+### 3. **Universal Pediatric Screening**
+- Recommended at ages **9-11 years** for all children [PMID: 38708402]
+- Particularly critical for homozygous FH (HoFH), which manifests much earlier in life and affects approximately 1 in 300,000 people [PMID: 38708402]
+- Early detection is essential as HoFH causes extremely high LDL cholesterol from birth, leading to premature cardiovascular disease if untreated [PMID: 38708402]
+
+### 4. **Integration of Genetic Testing**
+Genetic testing enhances FH screening by:
+- Facilitating definitive diagnosis, especially in cases missed by clinical criteria
+- Improving risk stratification beyond LDL-C and family history alone
+- Guiding treatment decisions
+- Improving treatment initiation and adherence
+- Enhancing cascade screening effectiveness [PMID: 38299384]
+
+## Clinical Utility
+
+The presence of an FH-causative variant is associated with substantially higher cardiovascular disease risk, even when LDL-C levels are only modestly elevated [PMID: 38299384]. This finding supports more aggressive lipid-lowering therapy in genetically confirmed cases [PMID: 30071997].
+
+## Confidence Level and Limitations
+
+**High confidence** in these recommendations based on expert consensus and pragmatic clinical trial data. However, implementation remains suboptimal in the United States, where FH genetic testing is rarely utilized despite being the most common genetic cause of cardiovascular disease [PMID: 38299384]. Further pragmatic implementation studies are needed to determine how to more effectively and affordably integrate genetic testing into clinical lipid screening programs [PMID: 38299384].
+
+======================================================================
+======================================================================
+
+SORU 27: Which lifestyle interventions provide the largest reduction in cardiovascular risk for secondary prevention?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: Which lifestyle interventions provide the largest reduction in cardiovascular risk for secondary prevention?
+Timestamp: 2025-10-10T00:03:36.250845
+
+RETRIEVAL SUMMARY:
+  Original query: Which lifestyle interventions provide the largest reduction in cardiovascular risk for secondary prevention?
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 2,585
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Answer: Largest Lifestyle Interventions for Secondary Prevention of Cardiovascular Disease
+
+Based on the available evidence, **lifestyle modifications combined with optimal medical therapy provide the most effective secondary prevention strategy**, though the research papers focus more on pharmacological interventions than quantifying specific lifestyle intervention effects.
+
+## Key Lifestyle Interventions Supported by Evidence:
+
+**1. Comprehensive Lifestyle Modifications**
+The most effective approach includes [PMID: 30341873]:
+- **Lifestyle changes** (diet, exercise, weight management)
+- **Optimal control of risk factors**: hypertension, diabetes mellitus, and dyslipidemia
+- These work synergistically with medical therapy to reduce mortality and cardiac events
+
+**2. Specific Lifestyle Components**
+For cardiovascular risk reduction, evidence supports [PMID: 33037326]:
+- **Regular physical exercise**
+- **Body weight management**
+- **Healthy dietary patterns**
+- **Stress management**
+- **Adequate sleep patterns with circadian entrainment**
+
+These interventions work through multiple mechanisms including prevention of obesity and insulin resistance, improvements in vascular health, reduced inflammation and oxidative stress, and decreased sympathetic overactivation [PMID: 33037326].
+
+## Important Context:
+
+While lifestyle interventions are emphasized as critical components of secondary prevention [PMID: 30341873], the provided research papers do not quantify the **relative magnitude** of risk reduction from specific lifestyle interventions compared to each other. The literature focuses heavily on lipid-lowering therapy (statins, ezetimibe, PCSK9 inhibitors) as the primary evidence-based secondary prevention strategy [PMID: 33781847, 38576462].
+
+## Confidence Level and Limitations:
+
+**Moderate confidence** - The papers confirm lifestyle interventions are important for secondary prevention but do not provide comparative effectiveness data showing which specific lifestyle intervention produces the "largest" reduction in cardiovascular risk. The evidence emphasizes that lifestyle modifications should be combined with intensive lipid-lowering therapy for optimal secondary prevention [PMID: 38576462].
+
+======================================================================
+======================================================================
+
+SORU 28: What follow-up testing and monitoring are recommended after discharge for a patient treated for acute myocardial infarction?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: What follow-up testing and monitoring are recommended after discharge for a patient treated for acute myocardial infarction?
+Timestamp: 2025-10-10T00:03:50.782157
+
+RETRIEVAL SUMMARY:
+  Original query: What follow-up testing and monitoring are recommended after discharge for a patient treated for acute myocardial infarction?
+  Abstracts found: 10
+  Full-text sections: 20
+  Routing: low_confidence
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 2,752
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Follow-Up Testing and Monitoring After Acute Myocardial Infarction
+
+Based on the available research, post-discharge management after acute myocardial infarction (AMI) focuses on comprehensive secondary prevention rather than routine functional testing.
+
+## Key Recommendations:
+
+### 1. **Routine Functional Testing**
+Recent evidence suggests that **routine functional testing may not be necessary** for all post-MI patients. A randomized trial of 1,706 high-risk patients who underwent PCI found that routine functional testing (nuclear stress testing, exercise ECG, or stress echocardiography) at 1 year did not improve outcomes compared to standard care. At 2 years, primary outcomes (death, MI, or hospitalization for unstable angina) were similar between groups (5.5% vs 6.0%, HR 0.90, 95% CI 0.61-1.35, P=0.62) [PMID: 36036496].
+
+### 2. **Secondary Prevention Components**
+Post-MI monitoring should emphasize comprehensive secondary prevention through cardiac rehabilitation, which includes [PMID: 39077194]:
+
+**Non-pharmacological interventions:**
+- Smoking cessation
+- Physical activity programs
+- Nutritional counseling
+- Psychosocial intervention
+
+**Pharmacological management:**
+- Antiplatelet therapy
+- Lipid-lowering therapy
+- Renin-angiotensin-aldosterone system (RAAS) inhibitors
+- Beta-blockers
+- Glucose-lowering drugs (when indicated)
+
+### 3. **Risk Factor Control**
+Studies have documented that cardiovascular risk factor control remains suboptimal in many MI patients, with high rates of recurrent cardiovascular events [PMID: 34758605]. This underscores the importance of systematic monitoring and optimization of modifiable risk factors.
+
+### 4. **Quality Indicators**
+Long-term care should be guided by established quality indicators for post-MI management, though specific monitoring intervals should be individualized based on patient risk profile [PMID: 39077194].
+
+## Confidence Level and Limitations:
+
+**Moderate-to-High Confidence:** The evidence against routine functional testing is based on a well-designed randomized trial, though it specifically studied high-risk PCI patients. The secondary prevention recommendations are well-established in cardiovascular medicine.
+
+**Limitations:** The provided papers do not detail specific timing intervals for laboratory monitoring (lipids, renal function, etc.) or echocardiographic follow-up for ventricular function assessment. Individual patient circumstances, including presence of heart failure, arrhythmias, or other complications, may require more intensive monitoring than discussed in these general recommendations.
+
+======================================================================
+======================================================================
+
+SORU 29: How should asymptomatic severe aortic stenosis be monitored and when is elective intervention indicated?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: How should asymptomatic severe aortic stenosis be monitored and when is elective intervention indicated?
+Timestamp: 2025-10-10T00:04:06.322505
+
+RETRIEVAL SUMMARY:
+  Original query: How should asymptomatic severe aortic stenosis be monitored and when is elective intervention indicated?
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: low_confidence
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 2,781
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Monitoring and Intervention for Asymptomatic Severe Aortic Stenosis
+
+## Direct Answer
+
+Asymptomatic severe aortic stenosis requires careful monitoring with regular clinical and echocardiographic surveillance. Current evidence increasingly supports early elective intervention in selected patients, particularly those with very severe disease or evidence of cardiac damage, rather than strict watchful waiting.
+
+## Monitoring Strategy
+
+**Clinical Surveillance:**
+- Regular assessment for symptom development is essential, as symptomatic severe AS has poor prognosis if untreated [PMID: 37423243]
+- Patients should be educated to recognize symptoms including dyspnea, angina, and syncope
+
+**Echocardiographic Monitoring:**
+- Serial echocardiography to assess disease progression
+- Advanced imaging can detect early cardiac damage using indices such as myocardial fibrosis, global longitudinal strain, and myocardial work index [PMID: 39537272]
+
+## Indications for Elective Intervention
+
+**Very Severe Asymptomatic AS:**
+A landmark randomized trial demonstrated that early surgery is superior to conservative care in asymptomatic patients with **very severe AS** (defined as aortic valve area ≤0.75 cm² with either jet velocity ≥4.5 m/s or mean gradient ≥50 mm Hg). The primary endpoint (operative mortality or cardiovascular death) occurred in only 1% of early-surgery patients versus 15% in conservative-care patients (HR 0.09, 95% CI 0.01-0.67, P=0.003) [PMID: 31733181].
+
+**Outcomes Data:**
+- In patients recommended for AVR, undergoing surgery was independently associated with higher survival (HR 0.17, p=0.038) [PMID: 30905426]
+- At 2 years, survival was 92.5% in the AVR-recommended group versus 83.9% in the watchful waiting group (p=0.044) [PMID: 30905426]
+- In the watchful waiting group, 43.9% either died or required surgery within 2 years [PMID: 30905426]
+
+**Emerging Criteria:**
+Evidence suggests that earlier intervention may prevent cardiac damage progression and reduce cardiovascular hospitalizations [PMID: 39537272]. Ongoing trials are investigating AVR for:
+- Asymptomatic severe AS with evidence of cardiac damage
+- Even moderate AS with symptoms or cardiac damage evidence [PMID: 39537272]
+
+## Treatment Options
+
+For elderly patients suitable for intervention, transcatheter aortic valve implantation (TAVI) is now the recommended treatment, showing superiority over surgical AVR and improved mortality, symptoms, and quality of life compared with medical therapy [PMID: 37423243].
+
+## Confidence Level and Limitations
+
+**High confidence** for very severe asymptomatic AS based on randomized trial data. However, the optimal timing for intervention in standard severe AS (without "very severe" criteria) remains under investigation. The decision should be individualized using a multidisciplinary approach, balancing procedural risks against benefits of preventing irreversible cardiac damage [PMID: 39537272, 37423243].
+
+======================================================================
+======================================================================
+
+SORU 30: What criteria determine suitability for outpatient management after low-risk syncope with abnormal ECG?
+
+======================================================================
+MEDICREW COMPLETE RAG RESULT
+======================================================================
+
+Question: What criteria determine suitability for outpatient management after low-risk syncope with abnormal ECG?
+Timestamp: 2025-10-10T00:04:20.233797
+
+RETRIEVAL SUMMARY:
+  Original query: What criteria determine suitability for outpatient management after low-risk syncope with abnormal ECG?
+  Expanded query: What criteria determine suitability for outpatient management after low-risk syncope with abnormal ECG? electrocardiogram EKG
+  Abstracts found: 10
+  Full-text sections: 0
+  Routing: sufficient
+
+GENERATION SUMMARY:
+  Model: claude-sonnet-4-5-20250929
+  Tokens: 2,179
+  Temperature: 0.3
+
+======================================================================
+ANSWER:
+======================================================================
+
+# Answer: Criteria for Outpatient Management After Low-Risk Syncope with Abnormal ECG
+
+## Direct Answer
+
+The presence of an **abnormal ECG** in syncope patients significantly increases the probability of cardiac syncope and typically warrants further evaluation rather than immediate outpatient discharge [PMID: 33881283]. However, specific risk stratification tools can help determine which patients with abnormal ECGs may still be suitable for outpatient management.
+
+## Evidence-Based Risk Stratification
+
+### The FAINT Score for Risk Assessment
+
+The FAINT score is a validated tool for older adults (≥60 years) that predicts 30-day serious cardiac outcomes. It includes five criteria [PMID: 31668571]:
+
+1. **F**ailure - History of heart failure
+2. **A**rrhythmia - History of cardiac arrhythmia  
+3. **I**nitial abnormal ECG
+4. **N**atriuretic peptide - Elevated pro B-type natriuretic peptide
+5. **T**roponin - Elevated high-sensitivity troponin T
+
+**Key Finding:** A FAINT score of 0 had a sensitivity of 96.7% (95% CI 92.9% to 98.8%) for identifying patients at low risk of 30-day mortality or serious cardiac outcomes. Patients with a score of 0 may be suitable for outpatient management, while those with scores ≥1 require closer monitoring [PMID: 31668571].
+
+### Role of ECG in Initial Evaluation
+
+The 12-lead ECG is the **only instrumental test recommended** for initial evaluation of syncope patients [PMID: 33881283]. The ECG can:
+
+- Disclose an arrhythmia associated with high likelihood of syncope in approximately 7% of emergency department patients, allowing immediate specific treatment [PMID: 33881283]
+- Select patients with high probability of cardiac syncope when abnormal [PMID: 33881283]
+- Help assess risk of major cardiovascular events or sudden cardiac death when the cause remains uncertain [PMID: 33881283]
+
+## Limitations and Confidence Level
+
+**Moderate Confidence:** While the FAINT score provides validated risk stratification, the provided literature does not specify detailed criteria for which specific ECG abnormalities are acceptable for outpatient management versus requiring admission. The decision requires integration of:
+
+- Specific ECG findings (type and severity of abnormality)
+- Additional risk factors from the FAINT score
+- Clinical context and patient history
+- Availability of timely outpatient follow-up
+
+**Clinical Implication:** An abnormal ECG alone does not automatically preclude outpatient management, but requires comprehensive risk assessment using validated tools like the FAINT score, particularly in older adults [PMID: 31668571].
+
+======================================================================
+======================================================================
+
