@@ -1,11 +1,6 @@
 """
-PubMed to MongoDB Downloader v2.0
-Enhanced version with:
-- Environment variables (.env)
-- Smart indexing
-- Hybrid MeSH + Keyword queries
-- Section-based truncation
-- Better error handling
+PubMed to MongoDB Downloader Core Module
+Contains only core download functionality
 """
 
 from Bio import Entrez
@@ -15,84 +10,27 @@ from tqdm import tqdm
 from datetime import datetime, timezone
 from pymongo.errors import DuplicateKeyError
 import os
-from dotenv import load_dotenv
 import xml.etree.ElementTree as ET
 import re
-
-# Load environment variables
-load_dotenv()
-
-# ============================================================
-# CONFIGURATION
-# ============================================================
-
-# NCBI Entrez Configuration
-Entrez.email = os.getenv("ENTREZ_EMAIL")
-Entrez.api_key = os.getenv("ENTREZ_API_KEY")
-
-# MongoDB Configuration
-MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/")
-DB_NAME = os.getenv("DB_NAME", "medicrew")
-COLLECTION_NAME = "pubmed_papers"
-
-# Rate limiting
-RATE_LIMIT = 0.34 if not Entrez.api_key else 0.1  # With API key: 10 req/sec
-
-# ============================================================
-# VALIDATION
-# ============================================================
-
-def validate_config():
-    """Validate required environment variables"""
-    if not Entrez.email:
-        print("❌ ERROR: ENTREZ_EMAIL not set in .env file!")
-        print("\n💡 Create a .env file with:")
-        print("   ENTREZ_EMAIL=your_email@example.com")
-        exit(1)
-    
-    if not Entrez.api_key:
-        print("⚠️  WARNING: ENTREZ_API_KEY not set")
-        print("   Downloads will be slower (3 req/sec vs 10 req/sec)")
-        print("   Get your key: https://www.ncbi.nlm.nih.gov/account/settings/")
-        print()
-    else:
-        print("✅ API Key detected - faster downloads enabled")
-
-# ============================================================
-# MONGODB CONNECTION
-# ============================================================
-
-def connect_mongodb():
-    """Connect to MongoDB"""
-    print("🔌 Connecting to MongoDB...")
-    try:
-        client = pymongo.MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
-        db = client[DB_NAME]
-        collection = db[COLLECTION_NAME]
-
-        # Test connection
-        client.server_info()
-        print(f"✅ Connected to MongoDB: {DB_NAME}.{COLLECTION_NAME}")
-        
-        # Show existing document count
-        existing_count = collection.count_documents({})
-        print(f"📊 Existing documents: {existing_count}")
-        
-        return collection
-    except Exception as e:
-        print(f"❌ MongoDB connection failed: {e}")
-        print("\n💡 Solutions:")
-        print("   1. Is MongoDB running? Terminal: mongod")
-        print("   2. Check MONGO_URI in .env file")
-        exit(1)
 
 # ============================================================
 # PUBMED API FUNCTIONS
 # ============================================================
 
-def search_pubmed(query, max_results=400):
+def search_pubmed(query, max_results=400, email=None, api_key=None):
     """Search PubMed and return list of PMIDs"""
-    print(f"🔍 Searching: '{query[:80]}...' (max {max_results} results)")    
+    
+    # Set Entrez credentials if provided
+    if email:
+        Entrez.email = email
+    if api_key:
+        Entrez.api_key = api_key
+    
+    # Rate limit based on whether API key exists
+    rate_limit = 0.1 if api_key else 0.34
+    
+    print(f"🔍 Searching: '{query[:80]}...' (max {max_results} results)")
+    
     try:
         handle = Entrez.esearch(
             db='pubmed',
@@ -352,20 +290,24 @@ def fetch_paper_details(pmid):
         return paper
         
     except Exception as e:
-        print(f"⚠️  Error fetching PMID {pmid}: {e}")
+        print(f"⚠️ Error fetching PMID {pmid}: {e}")
         return None
 
 # ============================================================
 # MONGODB OPERATIONS
 # ============================================================
 
-def download_to_mongodb(collection, query, domain, max_results=400):
-    """Download from PubMed and save directly to MongoDB"""    
+def download_to_mongodb(collection, query, domain, max_results=400, email=None, api_key=None):
+    """Download from PubMed and save directly to MongoDB"""
+    
     # Search
-    pmids = search_pubmed(query, max_results)
+    pmids = search_pubmed(query, max_results, email, api_key)
+    
+    # Rate limit based on whether API key exists
+    rate_limit = 0.1 if api_key else 0.34
     
     if not pmids:
-        print("⚠️  No results found")
+        print("⚠️ No results found")
         return 0
     
     saved_count = 0
@@ -403,14 +345,14 @@ def download_to_mongodb(collection, query, domain, max_results=400):
                 full_text_count += 1
             
             # Rate limit
-            time.sleep(RATE_LIMIT)
+            time.sleep(rate_limit)
             
         except DuplicateKeyError:
             skipped_count += 1
             continue
         except Exception as e:
             error_count += 1
-            print(f"\n⚠️  Error with PMID {pmid}: {e}")
+            print(f"\n⚠️ Error with PMID {pmid}: {e}")
             continue
     
     # Summary report
@@ -420,244 +362,3 @@ def download_to_mongodb(collection, query, domain, max_results=400):
     print(f"  - Errors: {error_count}")
     
     return saved_count
-
-# ============================================================
-# MAIN FUNCTION
-# ============================================================
-
-def main():
-    """Main function - all download operations"""
-    
-    print("="*70)
-    print("🏥 MediCrew PubMed → MongoDB Downloader (Cardiology Focus)")
-    print("="*70)
-    print()
-    
-    # Validate configuration
-    validate_config()
-    print()
-    
-    # MongoDB connection
-    collection = connect_mongodb()
-    print()
-    
-    total_saved = 0
-    
-    # ================================================================
-    # CARDIOLOGY PAPERS ONLY (EKG included)
-    # ================================================================
-    print("🔴 CARDIOLOGY PAPERS (Including EKG)")
-    print("-"*70)
-    
-    cardio_queries = [
-    # Major society guidelines
-    '("Practice Guideline"[Publication Type] OR "guideline"[Title]) AND ("Cardiology"[MeSH] OR "cardiovascular"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Specific guideline organizations
-    '("AHA"[Title/Abstract] OR "ACC"[Title/Abstract] OR "American Heart Association"[Title/Abstract] OR "American College of Cardiology"[Title/Abstract]) AND ("guideline"[Title/Abstract] OR "recommendation"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    '("ESC"[Title/Abstract] OR "European Society of Cardiology"[Title/Abstract]) AND ("guideline"[Title/Abstract] OR "recommendation"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Indications & contraindications
-    '("indication"[Title/Abstract] OR "indications"[Title/Abstract]) AND ("cardiovascular"[MeSH] OR "cardiology"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    '("contraindication"[Title/Abstract] OR "contraindicated"[Title/Abstract]) AND ("cardiovascular drug"[Title/Abstract] OR "cardiac"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Treatment algorithms
-    '("treatment algorithm"[Title/Abstract] OR "management protocol"[Title/Abstract]) AND ("heart"[MeSH] OR "cardiovascular"[MeSH]) AND 2018:2025[pdat]',
-    
-    # Clinical decision rules
-    '("clinical decision rule"[Title/Abstract] OR "risk score"[Title/Abstract] OR "risk stratification"[Title/Abstract]) AND ("cardiovascular"[MeSH] OR "cardiac"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Takotsubo
-    '("Takotsubo Cardiomyopathy"[MeSH] OR "takotsubo"[Title/Abstract] OR "stress cardiomyopathy"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Valvular diseases 
-    '("Aortic Valve Stenosis"[MeSH] OR "aortic stenosis"[Title/Abstract]) AND ("asymptomatic"[Title/Abstract] OR "monitoring"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Aortic pathologies
-    '("Aortic Dissection"[MeSH] OR "aortic dissection"[Title/Abstract]) AND ("emergency"[Title/Abstract] OR "acute management"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Cardiomyopathies
-    '("Cardiomyopathy, Hypertrophic"[MeSH] OR "hypertrophic cardiomyopathy"[Title/Abstract] OR "HCM"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Myocarditis
-    '("Myocarditis"[MeSH] OR "myocarditis"[Title/Abstract]) AND ("cardiac MRI"[Title/Abstract] OR "CMR"[Title/Abstract] OR "diagnosis"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Endocarditis
-    '("Endocarditis"[MeSH] OR "infective endocarditis"[Title/Abstract]) AND ("diagnosis"[Title/Abstract] OR "Duke criteria"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Pericardial diseases
-    '("Pericarditis"[MeSH] OR "pericarditis"[Title/Abstract] OR "pericardial effusion"[Title/Abstract]) AND 2018:2025[pdat]',
-
-    # PCI vs alternatives
-    '("Percutaneous Coronary Intervention"[MeSH] OR "PCI"[Title/Abstract]) AND ("stable coronary disease"[Title/Abstract] OR "stable angina"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # CABG
-    '("Coronary Artery Bypass"[MeSH] OR "CABG"[Title/Abstract]) AND ("multivessel disease"[Title/Abstract] OR "left main"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # TAVR vs SAVR 
-    '("Transcatheter Aortic Valve Replacement"[MeSH] OR "TAVR"[Title/Abstract] OR "TAVI"[Title/Abstract]) AND ("surgical"[Title/Abstract] OR "low risk"[Title/Abstract] OR "intermediate risk"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # CRT
-    '("Cardiac Resynchronization Therapy"[MeSH] OR "CRT"[Title/Abstract] OR "biventricular pacing"[Title/Abstract]) AND ("indication"[Title/Abstract] OR "guideline"[Title/Abstract] OR "primary prevention"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # ICD
-    '("Defibrillators, Implantable"[MeSH] OR "ICD"[Title/Abstract] OR "implantable cardioverter defibrillator"[Title/Abstract]) AND ("primary prevention"[Title/Abstract] OR "indication"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Mechanical circulatory support
-    '("Heart-Assist Devices"[MeSH] OR "mechanical circulatory support"[Title/Abstract] OR "ECMO"[Title/Abstract] OR "Impella"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Catheter ablation
-    '("Catheter Ablation"[MeSH] OR "ablation"[Title/Abstract]) AND ("atrial fibrillation"[Title/Abstract] OR "ventricular tachycardia"[Title/Abstract]) AND 2018:2025[pdat]',
-
-    # Anticoagulation
-    '("Anticoagulants"[MeSH] OR "anticoagulation"[Title/Abstract]) AND ("atrial fibrillation"[MeSH] OR "atrial fibrillation"[Title/Abstract]) AND ("bleeding"[Title/Abstract] OR "hemorrhage"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # DOACs vs Warfarin
-    '("direct oral anticoagulants"[Title/Abstract] OR "DOAC"[Title/Abstract] OR "NOAC"[Title/Abstract]) AND ("warfarin"[Title/Abstract] OR "vitamin K antagonist"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # ACE-I vs ARB
-    '("Angiotensin-Converting Enzyme Inhibitors"[MeSH] OR "ACE inhibitor"[Title/Abstract]) AND ("heart failure"[MeSH] OR "hypertension"[MeSH]) AND 2018:2025[pdat]',
-    
-    '("Angiotensin Receptor Antagonists"[MeSH] OR "ARB"[Title/Abstract]) AND ("heart failure"[MeSH] OR "hypertension"[MeSH]) AND 2018:2025[pdat]',
-    
-    # Comparison
-    '("ACE inhibitor"[Title/Abstract] OR "angiotensin converting enzyme inhibitor"[Title/Abstract]) AND ("ARB"[Title/Abstract] OR "angiotensin receptor blocker"[Title/Abstract]) AND ("comparison"[Title/Abstract] OR "versus"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Beta-blockers
-    '("Adrenergic beta-Antagonists"[MeSH] OR "beta blocker"[Title/Abstract]) AND ("heart failure"[Title/Abstract] OR "post myocardial infarction"[Title/Abstract] OR "elderly"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Antiplatelet
-    '("dual antiplatelet therapy"[Title/Abstract] OR "DAPT"[Title/Abstract]) AND ("duration"[Title/Abstract] OR "drug eluting stent"[Title/Abstract] OR "DES"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # PCSK9 inhibitors (yoktu)
-    '("PCSK9 Inhibitors"[MeSH] OR "PCSK9 inhibitor"[Title/Abstract] OR "evolocumab"[Title/Abstract] OR "alirocumab"[Title/Abstract]) AND ("secondary prevention"[Title/Abstract] OR "cardiovascular"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Lipid lowering in CKD
-    '("Hydroxymethylglutaryl-CoA Reductase Inhibitors"[MeSH] OR "statin"[Title/Abstract]) AND ("chronic kidney disease"[MeSH] OR "CKD"[Title/Abstract] OR "dialysis"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Pregnancy contraindications
-    '("Pregnancy"[MeSH] OR "pregnant"[Title/Abstract]) AND ("cardiovascular agents"[MeSH] OR "cardiac medication"[Title/Abstract]) AND ("contraindication"[Title/Abstract] OR "teratogenic"[Title/Abstract] OR "safety"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Perioperative management
-    '("Perioperative Period"[MeSH] OR "perioperative"[Title/Abstract]) AND ("anticoagulation"[Title/Abstract] OR "antiplatelet"[Title/Abstract]) AND ("non-cardiac surgery"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Troponin (başarılıydı, devam)
-    '("Troponin"[MeSH] OR "troponin"[Title/Abstract]) AND ("myocardial infarction"[MeSH] OR "acute coronary syndrome"[Title/Abstract]) AND ("interpretation"[Title/Abstract] OR "dynamics"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # BNP/NT-proBNP
-    '("Natriuretic Peptide, Brain"[MeSH] OR "BNP"[Title/Abstract] OR "NT-proBNP"[Title/Abstract]) AND ("heart failure"[MeSH] OR "diagnosis"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # ECG interpretation (daha detaylı)
-    '("Electrocardiography"[MeSH] OR "ECG interpretation"[Title/Abstract]) AND ("atrial flutter"[Title/Abstract] OR "atrial fibrillation"[Title/Abstract] OR "ventricular tachycardia"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Advanced echo
-    '("Echocardiography"[MeSH] OR "echocardiography"[Title/Abstract]) AND ("strain imaging"[Title/Abstract] OR "speckle tracking"[Title/Abstract] OR "3D echo"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Cardiac MRI specific findings
-    '("Magnetic Resonance Imaging"[MeSH] OR "cardiac MRI"[Title/Abstract] OR "CMR"[Title/Abstract]) AND ("myocarditis"[Title/Abstract] OR "cardiomyopathy"[Title/Abstract] OR "Lake Louise"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Stress testing
-    '("Exercise Test"[MeSH] OR "stress test"[Title/Abstract] OR "exercise testing"[Title/Abstract]) AND ("coronary artery disease"[MeSH] OR "ischemia"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Cardiac CT
-    '("Computed Tomography Angiography"[MeSH] OR "coronary CT"[Title/Abstract] OR "CCTA"[Title/Abstract]) AND 2018:2025[pdat]',
-
-    # STEMI management
-    '("ST Elevation Myocardial Infarction"[MeSH] OR "STEMI"[Title/Abstract]) AND ("management"[Title/Abstract] OR "treatment"[Title/Abstract] OR "first 24 hours"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Acute aortic syndrome 
-    '("aortic dissection"[Title/Abstract] OR "aortic syndrome"[Title/Abstract]) AND ("emergency"[Title/Abstract] OR "acute management"[Title/Abstract] OR "diagnosis"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Cardiogenic shock 
-    '("Shock, Cardiogenic"[MeSH] OR "cardiogenic shock"[Title/Abstract]) AND ("stabilization"[Title/Abstract] OR "mechanical support"[Title/Abstract] OR "management"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Cardiac arrest
-    '("Heart Arrest"[MeSH] OR "cardiac arrest"[Title/Abstract]) AND ("resuscitation"[Title/Abstract] OR "post-arrest care"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Unstable arrhythmias
-    '("ventricular tachycardia"[Title/Abstract] OR "ventricular fibrillation"[Title/Abstract]) AND ("unstable"[Title/Abstract] OR "acute management"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Hypertensive emergency
-    '("Hypertension"[MeSH] OR "hypertensive emergency"[Title/Abstract] OR "hypertensive crisis"[Title/Abstract]) AND ("management"[Title/Abstract] OR "treatment"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Acute pulmonary edema
-    '("Pulmonary Edema"[MeSH] OR "acute pulmonary edema"[Title/Abstract]) AND ("management"[Title/Abstract] OR "treatment"[Title/Abstract]) AND 2018:2025[pdat]',
-
-    # Pregnancy and cardiovascular disease
-    '("Pregnancy"[MeSH] OR "pregnant women"[Title/Abstract]) AND ("heart failure"[Title/Abstract] OR "cardiovascular disease"[Title/Abstract] OR "arrhythmia"[Title/Abstract]) AND ("management"[Title/Abstract] OR "treatment"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # CKD and cardiovascular disease
-    '("Renal Insufficiency, Chronic"[MeSH] OR "chronic kidney disease"[Title/Abstract] OR "CKD"[Title/Abstract]) AND ("cardiovascular"[Title/Abstract] OR "heart disease"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Elderly/geriatric cardiology
-    '("Aged"[MeSH] OR "elderly"[Title/Abstract] OR "geriatric"[Title/Abstract]) AND ("cardiovascular disease"[MeSH] OR "heart failure"[Title/Abstract] OR "hypertension"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Diabetes and cardiovascular
-    '("Diabetes Mellitus"[MeSH] OR "diabetes"[Title/Abstract]) AND ("cardiovascular disease"[Title/Abstract] OR "coronary artery disease"[Title/Abstract] OR "heart failure"[Title/Abstract]) AND 2018:2025[pdat]',
-
-    # Secondary prevention
-    '("Secondary Prevention"[MeSH] OR "secondary prevention"[Title/Abstract]) AND ("cardiovascular disease"[MeSH] OR "myocardial infarction"[Title/Abstract]) AND ("lifestyle"[Title/Abstract] OR "exercise"[Title/Abstract] OR "diet"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Familial hypercholesterolemia 
-    '("Hyperlipoproteinemia Type II"[MeSH] OR "familial hypercholesterolemia"[Title/Abstract]) AND ("screening"[Title/Abstract] OR "cascade testing"[Title/Abstract] OR "genetic"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Cardiac rehabilitation
-    '("Cardiac Rehabilitation"[MeSH] OR "cardiac rehabilitation"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Risk stratification scores
-    '("risk stratification"[Title/Abstract] OR "risk score"[Title/Abstract]) AND ("cardiovascular"[Title/Abstract] OR "cardiac"[Title/Abstract]) AND ("CHA2DS2-VASc"[Title/Abstract] OR "GRACE"[Title/Abstract] OR "TIMI"[Title/Abstract] OR "HAS-BLED"[Title/Abstract]) AND 2018:2025[pdat]',
-
-    # Post-MI follow-up
-    '("Myocardial Infarction"[MeSH] OR "myocardial infarction"[Title/Abstract]) AND ("follow-up"[Title/Abstract] OR "post-discharge"[Title/Abstract] OR "monitoring"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Syncope evaluation
-    '("Syncope"[MeSH] OR "syncope"[Title/Abstract]) AND ("risk stratification"[Title/Abstract] OR "evaluation"[Title/Abstract] OR "ECG"[Title/Abstract]) AND 2018:2025[pdat]',
-    
-    # Heart failure monitoring
-    '("Heart Failure"[MeSH] OR "heart failure"[Title/Abstract]) AND ("monitoring"[Title/Abstract] OR "follow-up"[Title/Abstract] OR "surveillance"[Title/Abstract]) AND 2018:2025[pdat]',
-    ]
-    
-    for query in cardio_queries:
-        count = download_to_mongodb(collection, query, 'cardiology', max_results=40)
-        total_saved += count
-        print()
-    
-    # ================================================================
-    # FINAL STATISTICS
-    # ================================================================
-    print("\n" + "="*70)
-    print("📊 FINAL STATISTICS")
-    print("="*70)
-    
-    # Total counts
-    total_count = collection.count_documents({})
-    full_text_count = collection.count_documents({'full_text': {'$ne': None}})
-    
-    print(f"\nTotal papers in MongoDB: {total_count}")
-    print(f"Papers with full text: {full_text_count} ({full_text_count/total_count*100:.1f}%)")
-    print(f"Papers with abstract only: {total_count - full_text_count}")
-    
-    # Only cardiology domain now
-    cardio_count = collection.count_documents({'domain': 'cardiology'})
-    print(f"\nCardiology papers: {cardio_count}")
-    
-    # Year distribution
-    print("\nYear distribution:")
-    pipeline = [
-        {'$match': {'year': {'$ne': None}}},
-        {'$group': {'_id': '$year', 'count': {'$sum': 1}}},
-        {'$sort': {'_id': -1}},
-        {'$limit': 5}
-    ]
-    year_stats = list(collection.aggregate(pipeline))
-    for stat in year_stats:
-        print(f"  - {stat['_id']}: {stat['count']} papers")
-    
-    print("\n✅ DOWNLOAD COMPLETE!")
-    print(f"📁 Database: {DB_NAME}")
-    print(f"📁 Collection: {COLLECTION_NAME}")
-
-if __name__ == "__main__":
-    main()

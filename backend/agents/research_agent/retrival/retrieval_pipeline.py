@@ -40,14 +40,14 @@ FULLTEXT_TOP_K = 20
 SCORE_THRESHOLD = 0.60
 
 # Hybrid parameters
-BM25_WEIGHT = 0.3  # BM25 ağırlığı
-DENSE_WEIGHT = 0.7  # Dense (semantic) ağırlığı
+BM25_WEIGHT = 0.3  # BM25 exact word weight
+DENSE_WEIGHT = 0.7  # Semantic weight
 
-BM25_TOP_K = 50  # BM25'ten kaç sonuç al (dense'den önce)
+BM25_TOP_K = 50  # match word number
 
 # Query Expansion
-DICTIONARY_PATH = "dictionary_words.json"
-EXPANSION_LIMIT = 3  # Maksimum expansion sayısı
+DICTIONARY_PATH = os.getenv("DICTIONARY_PATH", "dictionary_words.json")
+EXPANSION_LIMIT = 3  # Maximum expansion number
 
 
 # ============================================================
@@ -58,48 +58,48 @@ class HybridMedicrewRetriever:
     """BM25 + Dense hybrid retrieval with medical dictionary expansion"""
     
     def __init__(self, dictionary_path: str = DICTIONARY_PATH):
-        print("🚀 Hybrid Medicrew Retriever başlatılıyor...")
+        print("🚀 Hybrid Medicrew Retriever is starting...")
         
-        # 1. Medical Dictionary yükle - YENİ EKLENDİ
-        print("📚 Medical dictionary yükleniyor...")
+        # 1. Medical Dictionary load
+        print("📚 Medical dictionary is loading...")
         self.medical_dict = self.load_medical_dictionary(dictionary_path)
-        print(f"✅ Medical dictionary hazır: {len(self.medical_dict)} terim")
+        print(f"✅ Medical dictionary is ready: {len(self.medical_dict)} term")
         
         # 2. Embedding model
-        print("📦 Embedding model yükleniyor...")
+        print("📦 Embedding model loading...")
         self.embed_model = SentenceTransformer(EMBEDDING_MODEL)
-        print("✅ Model hazır")
+        print("✅ Model ready")
         
         # 3. Pinecone
-        print("🔗 Pinecone bağlantısı kuruluyor...")
+        print("🔗 Pinecone connection is starting...")
         pc = Pinecone(api_key=PINECONE_API_KEY)
         self.router_index = pc.Index(ROUTER_INDEX_NAME)
         self.unified_index = pc.Index(UNIFIED_INDEX_NAME)
-        print("✅ Pinecone bağlantısı hazır")
+        print("✅ Pinecone connection is ready")
         
         # 4. MongoDB
-        print("📚 MongoDB bağlantısı kuruluyor...")
+        print("📚 MongoDB connection is starting...")
         client = pymongo.MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
         db = client[DB_NAME]
         self.chunks_collection = db[CHUNKS_COLLECTION]
-        print("✅ MongoDB bağlantısı hazır")
+        print("✅ MongoDB connection is ready")
         
-        # 5. BM25 için abstract corpus'u yükle
-        print("🔍 BM25 index oluşturuluyor...")
+        # 5. Load for BM25  abstract corpus
+        print("🔍 BM25 index is creating...")
         self._build_bm25_index()
-        print("✅ BM25 hazır")
+        print("✅ BM25 is ready")
         
-        print("✅ Hybrid Retriever hazır!\n")
+        print("✅ Hybrid Retriever is ready!\n")
     
     def load_medical_dictionary(self, dictionary_path: str) -> Dict:
         """
-        Medical dictionary'yi JSON'dan yükle ve optimize et
+        Load Medical dictionary from JSON and optimize it
         """
         try:
             with open(dictionary_path, 'r', encoding='utf-8') as f:
                 dictionary_data = json.load(f)
             
-            # Dictionary'yi daha hızlı lookup için optimize et
+            # Optimize dictionary for higher speed
             medical_dict = {}
             for entry in dictionary_data:
                 abbr = entry['abbr']
@@ -112,17 +112,17 @@ class HybridMedicrewRetriever:
                     'confidence': entry['confidence']
                 }
             
-            print(f"   📖 {len(medical_dict)} medical terim yüklendi")
+            print(f"   📖 {len(medical_dict)} medical term was loaded!")
             return medical_dict
             
         except Exception as e:
-            print(f"❌ Dictionary yüklenemedi: {e}")
+            print(f"❌ Dictionary error: {e}")
             return {}
     
     def expand_query_with_dict(self, query: str) -> str:
         """
-        Query'yi medical dictionary ile akıllıca genişlet
-        Strategy: Sadece high-confidence terimleri genişlet
+        Expand query smartly with medical dictionary 
+        Strategy: Expand only high-confidence terms
         """
         if not self.medical_dict:
             return query
@@ -507,47 +507,5 @@ class HybridMedicrewRetriever:
         
         return "\n".join(output)
 
-
-# ============================================================
-# TEST FUNCTION - GÜNCELLENDİ
-# ============================================================
-
-def test_hybrid_retrieval_with_expansion():
-    """Hybrid retrieval with query expansion'ı test et"""
-    
-    retriever = HybridMedicrewRetriever()
-    
-    # Test query'leri (abbreviation ve synonym içeren)
-    test_queries = [
-        "What are treatments for HF?",  # Abbreviation
-        "What is MI diagnosis?",  # Abbreviation  
-        "What causes heart attack?",  # Synonym
-        "What are ACE inhibitors benefits?",  # Specific term
-        "How to treat CHF?",  # Abbreviation
-        "ECG findings in AF",  # Abbreviation
-        "PCI vs CABG for CAD",  # Multiple abbreviations
-    ]
-    
-    print("\n" + "="*70)
-    print("HYBRID RETRIEVAL WITH QUERY EXPANSION TEST")
-    print("="*70)
-    
-    for query in test_queries:
-        print(f"\n{'='*70}\n")
-        results = retriever.retrieve(query)
-        print("\n" + retriever.format_results(results))
-        print("\n" + "="*70)
-        
-        # Kullanıcı devam etmek için Enter'a bassın
-        try:
-            input("\nDevam etmek için Enter'a basın...")
-        except:
-            break
-
-
-# ============================================================
-# MAIN
-# ============================================================
-
 if __name__ == "__main__":
-    test_hybrid_retrieval_with_expansion()
+    pass
